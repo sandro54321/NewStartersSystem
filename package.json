@@ -10,6 +10,16 @@
     "type": "git",
     "url": "git+https://github.com/sandro54321/NewStartersSystem.git"
   },
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mongoose": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
