@@ -10,20 +10,20 @@
     "type": "git",
     "url": "git+https://github.com/sandro54321/NewStartersSystem.git"
   },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandro54321/NewStartersSystem/issues"
+  },
+  "homepage": "https://github.com/sandro54321/NewStartersSystem#readme",
   "dependencies": {
-    "bcryptjs": "*",
-    "body-parser": "*",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "cors": "*",
     "express": "*",
     "jsonwebtoken": "*",
     "mongoose": "*",
     "passport": "*",
     "passport-jwt": "*"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sandro54321/NewStartersSystem/issues"
-  },
-  "homepage": "https://github.com/sandro54321/NewStartersSystem#readme"
+  }
 }
