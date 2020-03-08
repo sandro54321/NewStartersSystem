@@ -1,0 +1,28 @@
+.card{
+    border-radius:0;
+  }
+  .card-header{
+      cursor: pointer;
+      background: #DAD6F5;
+      border-radius:0;
+  }
+  .dark{
+      background: #212167;
+      color: #fff;
+  }
+  .img-thumbnail{
+    border-radius:0;
+    border:0;
+  }
+  .list-group-item{
+    border-left: none;
+    border-right: none;
+  }
+  .list-group-item:last-child,.list-group-item:first-child {
+    border-radius: 0;
+  }
+  .list-group-item:first-child {
+    border-top: none;
+  }.list-group-item:last-child {
+    border-bottom: none;
+  }

@@ -1,0 +1,25 @@
+<input type="text" #myInput [(ngModel)]="name" (input) ="Search()"/>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Date Created</td>
+        <td>Department</td>
+        <td>State</td>
+        <td width="275">Action</td>
+      </tr>
+    </thead>
+    <tbody>
+       <tr *ngFor="let starter of starters">
+          <td>{{starter.name}}</td>
+          <td>{{starter.dateCreated}}</td>
+          <td>{{starter.department}}</td>
+          <td>{{starter.state}}</td>
+          <td width="275"> 
+              <a class="btn btn-info" routerLink="/show/{{starter._id}}">Detail</a> 
+              <a class="btn btn-success"  routerLink="/edit/{{starter._id}}">Edit</a>
+              <a class="btn btn-danger" (click)="deleteStarter(starter._id)">Delete</a>
+          </td>
+       </tr>
+    </tbody>
+</table>

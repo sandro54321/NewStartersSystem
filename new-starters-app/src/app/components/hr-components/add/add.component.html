@@ -1,0 +1,105 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form class="form-horizontal" (submit)="addStarter()">
+
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Name : </label>
+        <div class="col-sm-9">
+          <input id="name" type="text" class="form-control" [(ngModel)]="model.name" name="name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="col-sm-2 control-label">Email : </label>
+        <div class="col-sm-9">
+          <input id="email" type="text" class="form-control" [(ngModel)]="model.email" name="email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="jobTitle" class="col-sm-2 control-label">Job Title : </label>
+        <div class="col-sm-9">
+          <input id="jobTitle" type="text" class="form-control" [(ngModel)]="model.jobTitle" name="jobTitle">
+        </div>
+      </div> 
+
+      <div class="form-group">
+        <label for="employeeTypeDrop" class="col-sm-2 control-label">Employee Type </label>
+        <div class="col-sm-9">
+            <select id="employeeTypeDrop" [(ngModel)]="model.employeeType" name="employeeTypes">
+              <option *ngFor="let type of employeeTypes" [value]="type">{{type}}</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="divisionDrop" class="col-sm-2 control-label">Division </label>
+        <div class="col-sm-9">
+            <select id="divisionDrop" [(ngModel)]="model.division" name="Division">
+              <option *ngFor="let division of divisions" [value]="division">{{division}}</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="departmentDrop" class="col-sm-2 control-label">Department </label>
+        <div class="col-sm-9">
+            <select id="departmentDrop" [(ngModel)]="model.department" name="departments">
+              <option [value]="department.title" *ngFor="let department of filterDepartmentsByDivision(model.division)">{{department.title}}</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="locationDrop" class="col-sm-2 control-label">Location </label>
+        <div class="col-sm-9">
+            <select id="locationDrop" [(ngModel)]="model.location" name="Location">
+              <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="floorDrop" class="col-sm-2 control-label">Floor </label>
+        <div class="col-sm-9">
+            <select id="floorDrop" [(ngModel)]="model.floor" name="Floor">
+              <option *ngFor="let floor of floors" [value]="floor">{{floor}}</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="companyDrop" class="col-sm-2 control-label">Company </label>
+        <div class="col-sm-9">
+            <select id="companyDrop" [(ngModel)]="model.company" name="Company">
+              <option *ngFor="let company of companies" [value]="company">{{company}}</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lineManager" class="col-sm-2 control-label">Line Manager : </label>
+        <div class="col-sm-9">
+          <input id ="lineManager" type="text" class="form-control" [(ngModel)]="model.lineManager" name="department">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="startDate" class="col-sm-2 control-label">Start Date : </label>
+        <div class="col-sm-9">
+          <input id="startDate" type="date" class="form-control"  [(ngModel)]="model.startDate" name="startDate">
+          <p>{{model.startDate}}</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+          <button type="submit" class="btn btn-success">Save</button>
+          <a class="btn btn-info" (click)="goBack()">Cancel</a>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+</div>

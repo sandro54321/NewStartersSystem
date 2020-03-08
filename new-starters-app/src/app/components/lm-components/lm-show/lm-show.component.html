@@ -1,0 +1,154 @@
+<div>
+    <div class="card">
+      <div class="card-header dark">
+        <h5 class="mb-0">
+          Starter Details
+        </h5>
+      </div>
+      <div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col nd-6">
+              <div class="card">
+                <div class="card-body">
+                  <dl class="row">
+                    <dd class="col-sm-4">Name</dd>
+                    <dt class="col-sm-8">{{starter.name}}</dt>
+                    <dd class="col-sm-4">Job Title</dd>
+                    <dt class="col-sm-8">{{starter.jobTitle}}</dt>
+                    <dd class="col-sm-4">Employee Type</dd>
+                    <dt class="col-sm-8">{{starter.employeeType}}</dt>
+                    <dd class="col-sm-4">Division</dd>
+                    <dt class="col-sm-8">{{starter.division}}</dt>
+                    <dd class="col-sm-4">Department</dd>
+                    <dt class="col-sm-8">{{starter.department}}</dt>
+                    <dd class="col-sm-4">Line Manager</dd>
+                    <dt class="col-sm-8">{{starter.lineManager}}</dt>
+                    <dd class="col-sm-4">Location</dd>
+                    <dt class="col-sm-8">{{starter.location}}</dt>
+                    <dd class="col-sm-4">Floor</dd>
+                    <dt class="col-sm-8">{{starter.floor}}</dt>
+                    <dd class="col-sm-4">Company</dd>
+                    <dt class="col-sm-8">{{starter.company}}</dt>
+                    <dd class="col-sm-4">Start Date</dd>
+                    <dt class="col-sm-8">{{starter.startDate}}</dt>
+                    <dd class="col-sm-4">State</dd>
+                    <dt class="col-sm-8">{{starter.state}}</dt>
+                    <dd class="col-sm-4">Date Created</dd>
+                    <dt class="col-sm-8">{{starter.dateCreated}}</dt>
+                  </dl>
+                  <hr>
+                  <dl class="row">
+                    <dt class="col-sm-12">Comments</dt>
+                    <dd class="col-sm-12">Comments will go here.</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Starter Details-->
+  <div class="card">
+    <div class="card-header collapsed dark">
+      <h5 class="mb-0">
+        Building Access Info
+      </h5>
+      <a class="btn btn-info" routerLink="/lm-add/ba/{{starter._id}}">Add</a> 
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Location</th>
+            <th scope="col">Floor</th>
+            <th scope="col">Office Area Access</th>
+            <th scope="col">Equiptment Area Access</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of starter.buildingAccess">
+          <tr>
+            <td>{{item.building}}</td>
+            <td>{{item.floor}}</td>
+            <td>{{item.officeArea}}</td>
+            <td>{{item.equiptmentArea}}</td>
+            <td>{{item.state}}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+  </div>
+  <div class="card">
+      <div class="card-header collapsed dark">
+        <h5 class="mb-0">
+          Hardware Requests
+        </h5>
+        <a class="btn btn-info" routerLink="/lm-add/hr/{{starter._id}}">Add</a> 
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Manufacturer</th>
+              <th scope="col">Model</th>
+              <th scope="col">Device Type</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of starter.hardwareRequest">
+            <tr>
+              <td>{{item.manufacturer}}</td>
+              <td>{{item.model}}</td>
+              <td>{{item.deviceType}}</td>
+              <td>{{item.state}}</td>
+            </tr>
+          </tbody>
+        </table>
+    
+      </div>
+    </div>
+
+  
+  <div class="card">
+      <div class="card-header dark">
+        <h5 class="mb-0">
+          Software Requests
+        </h5>
+        <a class="btn btn-info" routerLink="/lm-add/sr/{{starter._id}}">Add</a> 
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Supplier</th>
+              <th scope="col">description</th>
+              <th scope="col">Account Type</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of starter.softwareRequest">
+            <tr>
+              <td>{{item.supplier}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.accountType}}</td>
+              <td>{{item.state}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+  
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+  
+      <a class="btn btn-info" (click)="goBack()">Cancel</a>
+    </div>
+  
+  </div>
+  

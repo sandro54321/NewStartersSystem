@@ -38,7 +38,7 @@ router.post('/authenticate', (req,res) => {
             if(err) throw err;
             if(isMatch){
                 const token = jwt.sign({user:user}, config.secret, {
-                    expiresIn: 604800 //1 week
+                    expiresIn: 200000
                 });
                 console.log("authenticate route token: " + token);
                 res.json({success: true, token: 'bearer ' + token, user: {id: user._id, username: user.username, email: user.email}});
