@@ -42,17 +42,26 @@ export class LmAddComponent implements OnInit {
   addArray(name){
     //this.baRequests.push({country: this.ba.country, building: this.ba.building, floor: this.ba.floor, room: this.ba.floor, officeArea: false, equiptmentArea: true})
     if(name === 'ba'){
-    this.model.buildingAccess.push({country: this.ba.country, building: this.ba.building, floor: this.ba.floor, room: this.ba.room, officeArea: this.ba.officeArea, equiptmentArea: this.ba.equiptmentArea, state: 'Open'})
+    this.model.buildingAccess.push({_id: this.makeid(24), country: this.ba.country, building: this.ba.building, floor: this.ba.floor, room: this.ba.room, officeArea: this.ba.officeArea, equiptmentArea: this.ba.equiptmentArea, state: 'Open'})
     console.table(this.model.buildingAccess);
     }else if(name === 'sr'){
-      this.model.softwareRequest.push({supplier: this.sr.supplier, description: this.sr.description, accountType: this.sr.accountType, state: 'Open'});
+      this.model.softwareRequest.push({_id: this.makeid(24), supplier: this.sr.supplier, description: this.sr.description, accountType: this.sr.accountType, state: 'Open'});
       console.table(this.model.softwareRequest);
     }else if(name === 'hr'){
-      this.model.hardwareRequest.push({manufacturer: this.hr.manufacturer, model: this.hr.model, deviceType: this.hr.deviceType, state: 'Open'});
+      this.model.hardwareRequest.push({_id: this.makeid(24), manufacturer: this.hr.manufacturer, model: this.hr.model, deviceType: this.hr.deviceType, state: 'Open'});
       console.table(this.model.hardwareRequest);
     }
   }
-  
+    
+  makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
 
   updateStarter(){
     this.commonService.updateStarter(this.id,this.model).subscribe(() => this.goBack())

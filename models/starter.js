@@ -55,6 +55,7 @@ const StarterSchema = mongoose.Schema({
         required: true
     },
     buildingAccess:[{
+        _id:String,
         country: String,
         building: String,
         floor: String,
@@ -64,12 +65,14 @@ const StarterSchema = mongoose.Schema({
         state:String
     }],
     softwareRequest:[{
+        _id: String,
         supplier: String,
         description: String,
         accountType: String,
         state:String
     }],
     hardwareRequest:[{
+        _id:String,
         manufacturer: String,
         model: String,
         deviceType: String,
@@ -106,6 +109,12 @@ module.exports.getAllStarters = function(callback){
  module.exports.getLmStarters = function(email, callback){
     // var collection = Starter.collection("starters");
      Starter.find( { lineManager: { $eq: email } }, callback);
+ }
+
+  //get it
+  module.exports.getItStarters = function(callback){
+    // var collection = Starter.collection("starters");
+     Starter.find({$or:[{ softwareRequest: { $exists:true, $ne:[] } }, { hardwareRequest: { $exists: true, $ne: [] } } ]} , callback)
  }
 
 module.exports.addStarter = function(newStarter, callback){

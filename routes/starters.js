@@ -55,6 +55,13 @@ router.get('/lm/:lm', passport.authenticate('jwt', {session:false}), function (r
     });
 });
 
+router.get('/it', passport.authenticate('jwt', {session:false}), function (req,res) {
+    Starter.getItStarters(function (err, starters){
+        if(err) throw err;
+        res.json(starters);
+    });
+});
+
 //update
 router.put('/update/:_id', function(req,res){
     let updatedStarter = {

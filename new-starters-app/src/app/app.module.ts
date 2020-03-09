@@ -22,6 +22,8 @@ import { LmHomeComponent } from './components/lm-components/lm-home/lm-home.comp
 import { AuthGuard } from './guards/auth.guard';
 import { LmAddComponent } from './components/lm-components//lm-add/lm-add.component';
 import { LmShowComponent } from './components/lm-components//lm-show/lm-show.component';
+import { ItShowComponent } from './components/it-components/it-show/it-show.component';
+import { ItHomeComponent } from './components/it-components/it-home/it-home.component';
 
 
 const appRoutes: Routes = [
@@ -32,7 +34,9 @@ const appRoutes: Routes = [
   {path: 'show/:id', component: ShowComponent},
   {path: 'lm', component: LmHomeComponent, canActivate: [AuthGuard]},
   {path: 'lm-add/:form/:id', component: LmAddComponent},
-  {path: 'lm-show/:id', component: LmShowComponent}
+  {path: 'lm-show/:id', component: LmShowComponent},
+  {path: 'it', component: ItHomeComponent, canActivate: [AuthGuard]},
+  {path: 'it-show/:id', component: ItShowComponent, canActivate: [AuthGuard]}
 
 ] 
 
@@ -47,7 +51,9 @@ const appRoutes: Routes = [
     HrHomeComponent,
     LmHomeComponent,
     LmAddComponent,
-    LmShowComponent
+    LmShowComponent,
+    ItShowComponent,
+    ItHomeComponent
   ],
   imports: [
     BrowserModule,

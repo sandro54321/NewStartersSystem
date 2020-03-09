@@ -13,7 +13,7 @@ export class Starter {
     company:String;
     startDate:String;
     state:String;
-    buildingAccess: Array<{country:String,building:String, floor:String, room:String, officeArea:Boolean, equiptmentArea: Boolean, state: String}> = [];
-    softwareRequest: Array<{supplier:String,description:String,accountType:String, state: String}> = [];
-    hardwareRequest: Array<{manufacturer:String,model:String,deviceType:String, state: String}> = [];
+    buildingAccess: Array<{_id: String, country:String,building:String, floor:String, room:String, officeArea:Boolean, equiptmentArea: Boolean, state: String}> = [];
+    softwareRequest: Array<{_id: String, supplier:String,description:String,accountType:String, state: String}> = [];
+    hardwareRequest: Array<{_id: String, manufacturer:String,model:String,deviceType:String, state: String}> = [];
 }

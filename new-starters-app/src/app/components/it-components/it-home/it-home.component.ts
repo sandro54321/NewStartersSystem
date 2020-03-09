@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
-
 import { CommonService } from '../../../services/common.service'
 import { AuthService } from '../../../services/auth.service'
 import { Starter } from '../../../models/Starter'; 
 
-
-@Component({ 
-  selector: 'app-lm-home',
-  templateUrl: './lm-home.component.html',
-  styleUrls: ['./lm-home.component.css']
+@Component({
+  selector: 'app-it-home',
+  templateUrl: './it-home.component.html',
+  styleUrls: ['./it-home.component.css']
 })
-export class LmHomeComponent implements OnInit {
+export class ItHomeComponent implements OnInit {
 
   email:String;
   name:String;
@@ -20,13 +18,12 @@ export class LmHomeComponent implements OnInit {
   constructor(public commonService:CommonService, public authService:AuthService) { }
 
   ngOnInit(): void {
-    let lmEmail = this.authService.getUserData(); 
-    this.email = lmEmail;
-    this.getLmItems();
+    this.getItItems();
   }
 
-  getLmItems(){ 
-    this.commonService.getLmItems(this.email).subscribe(starters=>{
+
+  getItItems(){ 
+    this.commonService.getItItems().subscribe(starters=>{
       this.starters = starters;
     })
   }
