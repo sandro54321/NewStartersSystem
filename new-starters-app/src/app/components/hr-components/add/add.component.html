@@ -1,105 +1,135 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <form class="form-horizontal" (submit)="addStarter()">
-
-      <div class="form-group">
-        <label for="name" class="col-sm-2 control-label">Name : </label>
-        <div class="col-sm-9">
-          <input id="name" type="text" class="form-control" [(ngModel)]="model.name" name="name">
+<form [formGroup]="newStarterForm" novalidate (ngSubmit)="newStarterForm.valid && addStarter()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Shipping Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First name" formControlName="firstName" >
+            <mat-error *ngIf="newStarterForm.controls['firstName'].hasError('required')">
+              First name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Last name" formControlName="lastName">
+            <mat-error *ngIf="newStarterForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email" formControlName="email">
+            <mat-error *ngIf="newStarterForm.controls['email'].hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Job Title" formControlName="jobTitle">
+            <mat-error *ngIf="newStarterForm.controls['jobTitle'].hasError('required')">
+              Job Title is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Employee Type</mat-label>
+            <mat-select formControlName="employeeType">
+              <mat-option *ngFor="let type of employeeTypes" [value]="type">
+                {{type}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Division</mat-label>
+            <mat-select formControlName="division">
+              <mat-option  *ngFor="let division of divisions" [value]="division">
+                {{division}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="email" class="col-sm-2 control-label">Email : </label>
-        <div class="col-sm-9">
-          <input id="email" type="text" class="form-control" [(ngModel)]="model.email" name="email">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department">
+              <mat-option [value]="department.title" *ngFor="let department of filterDepartmentsByDivision(this.newStarterForm.get('division').value)">
+                {{department.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Location</mat-label>
+            <mat-select formControlName="location">
+              <mat-option  *ngFor="let location of locations" [value]="location">
+                {{location}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="jobTitle" class="col-sm-2 control-label">Job Title : </label>
-        <div class="col-sm-9">
-          <input id="jobTitle" type="text" class="form-control" [(ngModel)]="model.jobTitle" name="jobTitle">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Floor</mat-label>
+            <mat-select formControlName="floor">
+              <mat-option  *ngFor="let floor of floors" [value]="floor">
+                {{floor}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-      </div> 
-
-      <div class="form-group">
-        <label for="employeeTypeDrop" class="col-sm-2 control-label">Employee Type </label>
-        <div class="col-sm-9">
-            <select id="employeeTypeDrop" [(ngModel)]="model.employeeType" name="employeeTypes">
-              <option *ngFor="let type of employeeTypes" [value]="type">{{type}}</option>
-            </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="divisionDrop" class="col-sm-2 control-label">Division </label>
-        <div class="col-sm-9">
-            <select id="divisionDrop" [(ngModel)]="model.division" name="Division">
-              <option *ngFor="let division of divisions" [value]="division">{{division}}</option>
-            </select>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Company</mat-label>
+            <mat-select formControlName="company">
+              <mat-option  *ngFor="let company of companies" [value]="company">
+                {{company}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
-
-      <div class="form-group">
-        <label for="departmentDrop" class="col-sm-2 control-label">Department </label>
-        <div class="col-sm-9">
-            <select id="departmentDrop" [(ngModel)]="model.department" name="departments">
-              <option [value]="department.title" *ngFor="let department of filterDepartmentsByDivision(model.division)">{{department.title}}</option>
-            </select>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Line Manager" formControlName="lineManager">
+            <mat-error *ngIf="newStarterForm.controls['lineManager'].hasError('required')">
+              Line manager is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         </div>
       </div>
-
-      <div class="form-group">
-        <label for="locationDrop" class="col-sm-2 control-label">Location </label>
-        <div class="col-sm-9">
-            <select id="locationDrop" [(ngModel)]="model.location" name="Location">
-              <option *ngFor="let location of locations" [value]="location">{{location}}</option>
-            </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="floorDrop" class="col-sm-2 control-label">Floor </label>
-        <div class="col-sm-9">
-            <select id="floorDrop" [(ngModel)]="model.floor" name="Floor">
-              <option *ngFor="let floor of floors" [value]="floor">{{floor}}</option>
-            </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="companyDrop" class="col-sm-2 control-label">Company </label>
-        <div class="col-sm-9">
-            <select id="companyDrop" [(ngModel)]="model.company" name="Company">
-              <option *ngFor="let company of companies" [value]="company">{{company}}</option>
-            </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="lineManager" class="col-sm-2 control-label">Line Manager : </label>
-        <div class="col-sm-9">
-          <input id ="lineManager" type="text" class="form-control" [(ngModel)]="model.lineManager" name="department">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="startDate" class="col-sm-2 control-label">Start Date : </label>
-        <div class="col-sm-9">
-          <input id="startDate" type="date" class="form-control"  [(ngModel)]="model.startDate" name="startDate">
-          <p>{{model.startDate}}</p>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-8">
-          <button type="submit" class="btn btn-success">Save</button>
-          <a class="btn btn-info" (click)="goBack()">Cancel</a>
-        </div>
-
-      </div>
-    </form>
-
-  </div>
-</div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn"  (click)="close()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" ng-disabled="newStarterForm.$invalid">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

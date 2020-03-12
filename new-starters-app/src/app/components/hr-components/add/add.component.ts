@@ -1,8 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 
 import { CommonService } from '../../../services/common.service'
 import { Starter } from '../../../models/Starter'; 
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+
+import {MatDialogRef} from '@angular/material/dialog';
+
+interface Food {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-add',
@@ -11,10 +20,27 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class AddComponent implements OnInit {
 
+  newStarterForm = this.fb.group({
+    firstName: [null, Validators.required],
+    lastName: [null, Validators.required],
+    email: [null, Validators.required],
+    jobTitle: [null, Validators.required],
+    employeeType: [null, Validators.required],
+    division: [null, Validators.required],
+    department: [null, Validators.required],
+    location: [null, Validators.required],
+    floor: [null, Validators.required],
+    company: [null, Validators.required],
+    lineManager: [null, Validators.required],
+    startDate: [null, Validators.required]
+  });
+
   constructor(
     public commonService:CommonService,
     public route:ActivatedRoute,
-    public router:Router
+    public router:Router,
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<AddComponent>,
   ) { }
 
   ngOnInit(){
@@ -27,8 +53,6 @@ export class AddComponent implements OnInit {
   locations = ['Minden', 'Forum', 'Five Oaks'];
   floors = ['Ground', '1st', '2nd', '3rd'];
   companies = ['JT Jersey', 'JT Guernsey', 'JT Denmark'];
-  //departments = ['Networking', 'Accounting']
-  
   departments = [
     {
       title: 'Networking',
@@ -45,16 +69,22 @@ export class AddComponent implements OnInit {
   ]
 
   addStarter(){
-    this.model.startDate = this.formatDate(this.model.startDate);
+    this.model.name = this.newStarterForm.get('firstName').value;
+    this.model.email = this.newStarterForm.get('email').value;
+    this.model.jobTitle = this.newStarterForm.get('jobTitle').value;
+    this.model.employeeType = this.newStarterForm.get('employeeType').value;
+    this.model.division = this.newStarterForm.get('division').value;
+    this.model.department = this.newStarterForm.get('department').value;
+    this.model.location = this.newStarterForm.get('location').value;
+    this.model.floor = this.newStarterForm.get('floor').value;
+    this.model.company = this.newStarterForm.get('company').value;
+    this.model.lineManager = this.newStarterForm.get('lineManager').value;
+    this.model.startDate = this.formatDate(this.newStarterForm.get('startDate').value);
     this.model.state = "Open";
 
     console.table(this.model);
 
-    this.commonService.addStarter(this.model).subscribe(()=> this.goBack())}
-
-   goBack(){
-    this.router.navigate(['/hr-home'])
-  }
+    this.commonService.addStarter(this.model).subscribe(()=> this.close())}
 
   formatDate(date){
     var oldDate = new Date(date);
@@ -70,5 +100,10 @@ export class AddComponent implements OnInit {
   filterDepartmentsByDivision(division) {
     return this.departments.filter(item => item.relatedTo === division);
   }
+
+  close() {
+    console.log("Closing");
+    this.dialogRef.close('reload');
+}
 
 }

@@ -1,0 +1,62 @@
+.grid-container {
+    margin: 20px;
+  }
+  
+  .dashboard-card {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+  
+  .more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+  
+  .dashboard-card-content {
+    text-align: center;
+  }
+  
+  .grid-container {
+    background-color: #EDEDF1;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .td {
+    display: flex;
+    padding: 2px 0;
+    justify-content: flex-start;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 93%;
+    padding-left: 30px;
+  }
+
+  .mat-column-actions {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 18% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-header-cell {
+    background-color: #0D96BC;
+}
+

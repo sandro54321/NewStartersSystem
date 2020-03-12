@@ -4,7 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {RouterModule, Routes} from '@angular/router';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,26 @@ import { LmAddComponent } from './components/lm-components//lm-add/lm-add.compon
 import { LmShowComponent } from './components/lm-components//lm-show/lm-show.component';
 import { ItShowComponent } from './components/it-components/it-show/it-show.component';
 import { ItHomeComponent } from './components/it-components/it-home/it-home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MaterialModule } from './material.module';
+import { TestingComponent } from './components/testing/testing.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { FormtestComponent } from './components/formtest/formtest.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+
+
 
 
 const appRoutes: Routes = [
@@ -36,7 +56,8 @@ const appRoutes: Routes = [
   {path: 'lm-add/:form/:id', component: LmAddComponent},
   {path: 'lm-show/:id', component: LmShowComponent},
   {path: 'it', component: ItHomeComponent, canActivate: [AuthGuard]},
-  {path: 'it-show/:id', component: ItShowComponent, canActivate: [AuthGuard]}
+  {path: 'it-show/:id', component: ItShowComponent, canActivate: [AuthGuard]},
+  {path: 'dash/:id', component: TestingComponent, canActivate: [AuthGuard]}
 
 ] 
 
@@ -53,16 +74,35 @@ const appRoutes: Routes = [
     LmAddComponent,
     LmShowComponent,
     ItShowComponent,
-    ItHomeComponent
+    ItHomeComponent,
+    TestingComponent,
+    NavigationComponent,
+    FormtestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService, CommonService, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddComponent]
 })
 export class AppModule { }
