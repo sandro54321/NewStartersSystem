@@ -1,138 +1,298 @@
-<div class="panel panel-default">
-    <div class="panel-body">
+    <!-- BA -->
+    <div *ngIf="this.tp == 'ba'">
+        <form [formGroup]="newBaForm" novalidate (ngSubmit)="updateStarter()">
+          <mat-card class="shipping-card">
+            <mat-card-header>
+              <mat-card-title>Building Access Request</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field>
+                    <mat-label>Country</mat-label>
+                    <mat-select formControlName="country">
+                      <mat-option *ngFor="let country of countries" [value]="country">
+                        {{country}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field>
+                    <mat-label>Building</mat-label>
+                    <mat-select formControlName="building">
+                      <mat-option  *ngFor="let building of buildings" [value]="building">
+                        {{building}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field>
+                    <mat-label>Floor</mat-label>
+                    <mat-select formControlName="floor">
+                      <mat-option *ngFor="let floor of floors" [value]="floor">
+                        {{floor}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field>
+                    <mat-label>Room</mat-label>
+                    <mat-select formControlName="room">
+                      <mat-option  *ngFor="let room of rooms" [value]="room">
+                        {{room}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-checkbox formControlName="officeArea">Office Area Access</mat-checkbox>
+                </div>
+                <div class="col">
+                  <mat-checkbox formControlName="equipmentArea">Equiptment Area Access</mat-checkbox>
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="warn"  (click)="close()">Cancel</button>
+              <button mat-raised-button color="primary" [disabled]="newBaForm.invalid" (click)="addArray('ba')">Add</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="model.buildingAccess.length < 1">Save</button>
+            </mat-card-actions>
+          </mat-card>
+        </form>
+
+        <table mat-table [dataSource]="BaDataSource"  class="mat-elevation-z8" >
+
+          <ng-container matColumnDef="building">
+            <th mat-header-cell *matHeaderCellDef> Building </th>
+            <td mat-cell *matCellDef="let element" align="left"> {{element.building}} </td>
+          </ng-container>
+        
+  
+          <ng-container matColumnDef="floor">
+            <th mat-header-cell *matHeaderCellDef> Floor</th>
+            <td mat-cell *matCellDef="let element" align="left"> {{element.floor}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="room">
+            <th mat-header-cell *matHeaderCellDef> Room</th>
+            <td mat-cell *matCellDef="let element" align="left"> {{element.room}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="equipmentArea">
+            <th mat-header-cell *matHeaderCellDef> Equipment Area</th>
+            <td mat-cell *matCellDef="let element" align="left"> {{element.equiptmentArea}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="officeArea">
+            <th mat-header-cell *matHeaderCellDef> Office Area</th>
+            <td mat-cell *matCellDef="let element" align="left"> {{element.officeArea}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef> State </th>
+            <td mat-cell *matCellDef="let element" align="left"> {{element.state}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element" align="left"> 
+              <mat-icon (click)="onRemove(element._id, 'ba')">delete</mat-icon>
+            </td>
+          </ng-container> 
+
+
+          <tr mat-header-row *matHeaderRowDef="BaColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: BaColumns;"></tr>
+
+        </table>
+    </div>
       
-      <div *ngIf="router.url.includes('/ba/')">
-        <form class="form-horizontal" (submit)="updateStarter()">
 
-        <div class="form-group">
-          <label for="country" class="col-sm-2 control-label">Country : </label>
-          <div class="col-sm-9">
-            <input id="country" type="text" class="form-control" [(ngModel)]="ba.country" name="Country">
-          </div>
-        </div>
-
-        <div class="form-group"> 
-            <label for="building" class="col-sm-2 control-label">Building : </label>
-            <div class="col-sm-9">
-              <input id="building" type="text" class="form-control" [(ngModel)]="ba.building" name="Building">
+    <!-- SR -->
+    <div *ngIf="this.tp == 'sr'">
+      <form [formGroup]="newSrForm" novalidate (ngSubmit)="updateStarter()">
+        <mat-card class="shipping-card">
+          <mat-card-header>
+            <mat-card-title>Software Request</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>Supplier</mat-label>
+                  <mat-select formControlName="supplier">
+                    <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+                      {{supplier}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>Description</mat-label>
+                  <mat-select formControlName="description">
+                    <mat-option  *ngFor="let description of descriptions" [value]="description">
+                      {{description}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
             </div>
-          </div>
-            
-        <div class="form-group">
-            <label for="floor" class="col-sm-2 control-label">Floor : </label>
-            <div class="col-sm-9">
-              <input id="floor" type="text" class="form-control" [(ngModel)]="ba.floor" name="Floor">
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>Floor</mat-label>
+                  <mat-select formControlName="accountType">
+                    <mat-option *ngFor="let accountType of accountTypes" [value]="accountType">
+                      {{accountType}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
             </div>
-          </div>
-            
-        <div class="form-group">
-            <label for="room" class="col-sm-2 control-label">Room : </label>
-            <div class="col-sm-9">
-              <input id="room" type="text" class="form-control" [(ngModel)]="ba.room" name="Room">
-            </div>
-    
-          </div>
-
-          <div class="form-group">
-            <label for="office" class="col-sm-2 control-label">Office Area Access</label>
-            <div class="col-sm-9">
-              <input id="office" type="checkbox" id="office"  ng-true-value="false" ng-false-value="true" [(ngModel)]="ba.officeArea"  name="officeArea">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="equiptment" class="col-sm-2 control-label">Equiptment Area Access</label>
-            <div class="col-sm-9">
-              <input type="checkbox" id="equiptment" ng-true-value="false" ng-false-value="true" [(ngModel)]="ba.equiptmentArea"  name="equiptmentArea">
-            </div>
-          </div>
-
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-8" >
-            <button type="submit" class="btn btn-success">Save</button>
-            <a class="btn btn-info" (click)="addArray('ba')">Add</a>
-          </div>
-        </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="warn"  (click)="close()">Cancel</button>
+            <button mat-raised-button color="primary" [disabled]="newSrForm.invalid" (click)="addArray('sr')">Add</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="model.softwareRequest.length < 1">Save</button>
+          </mat-card-actions>
+        </mat-card>
       </form>
-    </div>
 
-      <div *ngIf="router.url.includes('/hr/')">
-        <form class="form-horizontal" (submit)="updateStarter()">
+      <table mat-table [dataSource]="SrDataSource"  class="mat-elevation-z8" >
 
-          <div class="form-group">
-            <label for="manufacturer" class="col-sm-2 control-label">Manufacturer : </label>
-            <div class="col-sm-9">
-              <input id="manufacturer" type="text" class="form-control" [(ngModel)]="hr.manufacturer" name="Manufacturer">
-            </div>
-          </div>
-  
-          <div class="form-group">
-              <label for="model" class="col-sm-2 control-label">Model : </label>
-              <div class="col-sm-9">
-                <input id="model" type="text" class="form-control" [(ngModel)]="hr.model" name="Model">
-              </div>
-            </div>
-              
-          <div class="form-group">
-              <label for="device" class="col-sm-2 control-label">Device Type : </label>
-              <div class="col-sm-9">
-                <input id="device" type="text" class="form-control" [(ngModel)]="hr.deviceType" name="deviceType">
-              </div>
-            </div>
-              
-    
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-8" >
-              <button type="submit" class="btn btn-success">Save</button>
-              <a class="btn btn-info" (click)="addArray('hr')">Add</a>
-            </div>
-    
-          </div>
-  
-        </form>
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef> Supplier </th>
+          <td mat-cell *matCellDef="let element" align="left"> {{element.supplier}} </td>
+        </ng-container>
       
-      </div>
 
-      
-      <div *ngIf="router.url.includes('/sr/')">
-        <form class="form-horizontal" (submit)="updateStarter()">
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description</th>
+          <td mat-cell *matCellDef="let element" align="left"> {{element.description}} </td>
+        </ng-container>
 
-          <div class="form-group">
-            <label for="supplier" class="col-sm-2 control-label">Supplier : </label>
-            <div class="col-sm-9">
-              <input id="supplier" type="text" class="form-control" [(ngModel)]="sr.supplier" name="Supplier">
-            </div>
-          </div>
-  
-          <div class="form-group">
-              <label for="description" class="col-sm-2 control-label">Description : </label>
-              <div class="col-sm-9">
-                <input id="description" type="text" class="form-control" [(ngModel)]="sr.description" name="description">
-              </div>
-            </div>
-              
-          <div class="form-group">
-              <label for="account" class="col-sm-2 control-label">Account Type : </label>
-              <div class="col-sm-9">
-                <input id="account" type="text" class="form-control" [(ngModel)]="sr.accountType" name="accountType">
-              </div>
-            </div>
-              
-    
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-8" >
-              <button type="submit" class="btn btn-success">Save</button>
-              <a class="btn btn-info" (click)="addArray('sr')">Add</a>
-            </div>
-    
-          </div>
-  
-        </form>
-      
-      </div>
+        <ng-container matColumnDef="accountType">
+          <th mat-header-cell *matHeaderCellDef> Account Type</th>
+          <td mat-cell *matCellDef="let element" align="left"> {{element.accountType}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef> State </th>
+          <td mat-cell *matCellDef="let element" align="left"> {{element.state}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element" align="left"> 
+            <mat-icon (click)="onRemove(element._id, 'sr')">delete</mat-icon>
+          </td>
+        </ng-container> 
 
 
-  
-    </div>
+        <tr mat-header-row *matHeaderRowDef="SrColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: SrColumns;"></tr>
+
+      </table>
   </div>
-  
+
+   <!-- HR -->
+   <div *ngIf="this.tp == 'hr'">
+    <form [formGroup]="newHrForm" novalidate (ngSubmit)="updateStarter()">
+      <mat-card class="shipping-card">
+        <mat-card-header>
+          <mat-card-title>Hardware Request</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Manufacturer</mat-label>
+                <mat-select formControlName="manufacturer">
+                  <mat-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
+                    {{manufacturer}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Model</mat-label>
+                <mat-select formControlName="model">
+                  <mat-option  *ngFor="let model of models" [value]="model">
+                    {{model}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Device Type</mat-label>
+                <mat-select formControlName="deviceType">
+                  <mat-option *ngFor="let deviceType of deviceTypes" [value]="deviceType">
+                    {{deviceType}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="warn"  (click)="close()">Cancel</button>
+          <button mat-raised-button color="primary" [disabled]="newHrForm.invalid" (click)="addArray('hr')">Add</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="model.hardwareRequest.length < 1">Save</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+
+    <table mat-table [dataSource]="HrDataSource"  class="mat-elevation-z8" >
+
+      <ng-container matColumnDef="manufacturer">
+        <th mat-header-cell *matHeaderCellDef> Manufacturer </th>
+        <td mat-cell *matCellDef="let element" align="left"> {{element.manufacturer}} </td>
+      </ng-container>
+    
+
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef> Model</th>
+        <td mat-cell *matCellDef="let element" align="left"> {{element.model}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deviceType">
+        <th mat-header-cell *matHeaderCellDef> Device Type</th>
+        <td mat-cell *matCellDef="let element" align="left"> {{element.deviceType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef> State </th>
+        <td mat-cell *matCellDef="let element" align="left"> {{element.state}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element" align="left"> 
+          <mat-icon (click)="onRemove(element._id, 'hr')">delete</mat-icon>
+        </td>
+      </ng-container> 
+
+
+      <tr mat-header-row *matHeaderRowDef="HrColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: HrColumns;"></tr>
+
+    </table>
+</div>
+
+
+
+
+
+      

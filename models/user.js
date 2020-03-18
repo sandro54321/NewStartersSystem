@@ -55,3 +55,8 @@ module.exports.comparePassword = function(password, hash, callback){
         callback(null, isMatch);
     });
 }
+
+module.exports.getAllLineManagers = function(callback){
+    User.find(callback).select('email')
+
+}

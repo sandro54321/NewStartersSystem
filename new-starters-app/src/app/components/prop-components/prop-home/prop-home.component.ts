@@ -12,11 +12,11 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-it-home',
-  templateUrl: './it-home.component.html',
-  styleUrls: ['./it-home.component.css']
+  selector: 'app-prop-home',
+  templateUrl: './prop-home.component.html',
+  styleUrls: ['./prop-home.component.css']
 })
-export class ItHomeComponent implements OnInit {
+export class PropHomeComponent implements OnInit {
 
   email:String;
   name:String;
@@ -31,12 +31,12 @@ export class ItHomeComponent implements OnInit {
   constructor(public commonService:CommonService, public authService:AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getItItems();
+    this.getPropertyItems();
   }
 
-
-  getItItems(){ 
-    this.commonService.getItItems().subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator})
+  
+  getPropertyItems(){ 
+    this.commonService.getPropertyItems().subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator})
   }
 
     
@@ -45,4 +45,6 @@ export class ItHomeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   
+
 }
+ 

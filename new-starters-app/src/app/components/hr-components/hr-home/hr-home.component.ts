@@ -1,21 +1,19 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-
 import { CommonService } from '../../../services/common.service'
-import { Starter } from '../../../models/Starter'; 
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
 import {MatPaginator} from '@angular/material/paginator';
-
 import {MatDialog} from '@angular/material/dialog';
 import { AddComponent } from '../add/add.component';
 import { EditComponent } from '../edit/edit.component';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-hr-home',
   templateUrl: './hr-home.component.html',
   styleUrls: ['./hr-home.component.css']
 })
+
 export class HrHomeComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
@@ -23,14 +21,12 @@ export class HrHomeComponent implements OnInit {
 
   constructor(public commonService:CommonService, public dialog: MatDialog) { }
 
-  ngOnInit(): void {
-    this.getStarters();
-  }
-
-  //starterss:Starter[];
   displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'actions'];
   dataSource;
 
+  ngOnInit(): void {
+    this.getStarters();
+  }
 
   getStarters(){
     this.commonService.getStarters().subscribe(starters=> {this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator;} )  
@@ -56,4 +52,25 @@ export class HrHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(data => {if(data == "reload"){this.getStarters()}});
   }
+
+  confirmDialog(id): void {
+    
+    const message = `Are you sure you want to delete this request?`;
+ 
+    const dialogData = new ConfirmDialogModel("Confirm Action", message, id);
+ 
+    const ConfirmdialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData,
+    });
+
+    ConfirmdialogRef.afterClosed().subscribe(dialogResult => {
+      if(dialogResult != false){
+
+        this.deleteStarter(dialogResult);
+        
+      }
+    });
+  }
+
 }

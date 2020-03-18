@@ -1,17 +1,13 @@
 import { Component, OnInit,  } from '@angular/core';
-
 import { CommonService } from '../../../services/common.service'
 import { Starter } from '../../../models/Starter'; 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
-
+import {Observable} from 'rxjs';
 import {MatDialogRef} from '@angular/material/dialog';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add',
@@ -19,6 +15,19 @@ interface Food {
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+
+  constructor(
+    public commonService:CommonService,
+    public route:ActivatedRoute,
+    public router:Router,
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<AddComponent>
+  ) { }
+
+  lmControl = new FormControl();
+  filteredOptions: Observable<string[]>;
+  options: string[];
+  model = new Starter();
 
   newStarterForm = this.fb.group({
     firstName: [null, Validators.required],
@@ -34,20 +43,7 @@ export class AddComponent implements OnInit {
     lineManager: [null, Validators.required],
     startDate: [null, Validators.required]
   });
-
-  constructor(
-    public commonService:CommonService,
-    public route:ActivatedRoute,
-    public router:Router,
-    private fb: FormBuilder,
-    private dialogRef: MatDialogRef<AddComponent>,
-  ) { }
-
-  ngOnInit(){
-  }
-
-  model = new Starter();
-
+  
   divisions = ['CTS', 'HR', 'Finance'];
   employeeTypes = ['Employee', 'Bursary', 'Graduate', 'Temp'];
   locations = ['Minden', 'Forum', 'Five Oaks'];
@@ -68,6 +64,18 @@ export class AddComponent implements OnInit {
     }
   ]
 
+  ngOnInit(){
+      this.commonService.getLineManagers().subscribe(lineManagers => 
+        {this.options = lineManagers, 
+        this.filteredOptions = this.lmControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          );
+      });
+
+  }
+
   addStarter(){
     this.model.name = this.newStarterForm.get('firstName').value;
     this.model.email = this.newStarterForm.get('email').value;
@@ -84,7 +92,8 @@ export class AddComponent implements OnInit {
 
     console.table(this.model);
 
-    this.commonService.addStarter(this.model).subscribe(()=> this.close())}
+    this.commonService.addStarter(this.model).subscribe(()=> this.close())
+  }
 
   formatDate(date){
     var oldDate = new Date(date);
@@ -104,6 +113,12 @@ export class AddComponent implements OnInit {
   close() {
     console.log("Closing");
     this.dialogRef.close('reload');
-}
+  }
 
-}
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+} 

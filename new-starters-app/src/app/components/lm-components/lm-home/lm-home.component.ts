@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 
 import { CommonService } from '../../../services/common.service'
 import { AuthService } from '../../../services/auth.service'
 import { Starter } from '../../../models/Starter'; 
+
+import { MatSort } from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
+import {MatPaginator} from '@angular/material/paginator';
+
+import {MatDialog} from '@angular/material/dialog';
 
 
 @Component({ 
@@ -17,28 +24,29 @@ export class LmHomeComponent implements OnInit {
   name:String;
   starters:Starter[];
 
-  constructor(public commonService:CommonService, public authService:AuthService) { }
+  displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'actions'];
+  dataSource;
+
+  
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+
+  constructor(public commonService:CommonService, public authService:AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    let lmEmail = this.authService.getUserData(); 
-    this.email = lmEmail;
+    this.email = this.authService.getUserData().email; 
     this.getLmItems();
   }
 
   getLmItems(){ 
-    this.commonService.getLmItems(this.email).subscribe(starters=>{
-      this.starters = starters;
-    })
+    this.commonService.getLmItems(this.email).subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator;})
+  }
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  Search(){
-    if(this.name != ""){
-      this.starters = this.starters.filter(res=>{
-        return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase())
-      })
-    }else if (this.name == ""){
-      this.ngOnInit();
-    }
-  }
 
 }

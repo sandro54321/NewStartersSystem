@@ -117,6 +117,12 @@ module.exports.getAllStarters = function(callback){
      Starter.find({$or:[{ softwareRequest: { $exists:true, $ne:[] } }, { hardwareRequest: { $exists: true, $ne: [] } } ]} , callback)
  }
 
+   //get property
+   module.exports.getPropertyStarters = function(callback){
+    // var collection = Starter.collection("starters");
+     Starter.find({buildingAccess: { $exists:true, $ne:[]}}, callback)
+ }
+
 module.exports.addStarter = function(newStarter, callback){
     newStarter.save(callback);
 }

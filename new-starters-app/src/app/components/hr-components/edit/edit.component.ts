@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import { CommonService } from '../../../services/common.service'
 import { Starter } from '../../../models/Starter'; 
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Inject } from '@angular/core';
-
 import { FormBuilder, Validators } from '@angular/forms';
 
 
@@ -16,6 +13,16 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
+
+  constructor(
+    public commonService:CommonService,
+    public route:ActivatedRoute,
+    public router:Router,
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<EditComponent>
+  ) { } 
+
 
   newStarterForm = this.fb.group({
     firstName: [null, Validators.required],
@@ -32,29 +39,13 @@ export class EditComponent implements OnInit {
     startDate: [null, Validators.required]
   });
 
-  constructor(
-    public commonService:CommonService,
-    public route:ActivatedRoute,
-    public router:Router,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<EditComponent>
-  ) { } 
-
-  ngOnInit(){
-    this.getStarter();
-  }
-
   model: Starter
-  
   id = this.route.snapshot.params['id'];
-
   divisions = ['CTS', 'HR', 'Finance'];
   employeeTypes = ['Employee', 'Bursary', 'Graduate', 'Temp'];
   locations = ['Minden', 'Forum', 'Five Oaks'];
   floors = ['Ground', '1st', '2nd', '3rd'];
   companies = ['JT Jersey', 'JT Guernsey', 'JT Denmark'];
-
   departments = [
     {
       title: 'Networking',
@@ -69,6 +60,10 @@ export class EditComponent implements OnInit {
       relatedTo: 'Finance' 
     }
   ]
+
+  ngOnInit(){
+    this.getStarter();
+  }
 
   getStarter(){
     this.commonService.getStarter(this.data.id).subscribe(starter=> 
@@ -88,7 +83,6 @@ export class EditComponent implements OnInit {
             startDate: this.model.startDate
           })
       })
-   
   }
   
   updateStarter(){
@@ -112,7 +106,7 @@ export class EditComponent implements OnInit {
     return this.departments.filter(item => item.relatedTo === division);
   }
 
-    formatDate(date){
+  formatDate(date){
     var oldDate = new Date(date);
     var dd = String(oldDate.getDate()).padStart(2, '0');
     var mm = String(oldDate.getMonth() + 1).padStart(2, '0');
@@ -122,9 +116,10 @@ export class EditComponent implements OnInit {
 
     return newDate;
   }
+
   close() {
     console.log("Closing");
     this.dialogRef.close('reload');
-}
+  }
 
 }

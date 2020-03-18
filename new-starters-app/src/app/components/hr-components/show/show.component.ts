@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { CommonService } from '../../../services/common.service'
 import { Starter } from '../../../models/Starter'; 
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -12,6 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './show.component.html',
   styleUrls: ['./show.component.css']
 })
+
 export class ShowComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
@@ -43,5 +42,6 @@ export class ShowComponent implements OnInit {
   goBack(){
     this.router.navigate(['/hr-home'])
   }
+  
 }
 

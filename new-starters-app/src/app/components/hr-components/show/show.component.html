@@ -1,6 +1,19 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Starter Details</h1>
-  <button  mat-raised-button color="warn"  (click)="goBack()" >Go Back</button>
+
+
+
+<div fxLayout fxLayoutAlign="flex-start" >
+          <div fxFlex="93%">
+            <h1 class="mat-h1">Starter Details</h1>
+          </div>
+          <div >
+            <button  mat-raised-button color="warn"  (click)="goBack()" >Go Back</button>
+
+          </div>
+        </div>
+
+
+
   <mat-grid-list cols="2" rowHeight="270px">
     <mat-grid-tile  [colspan]="2" [rowspan]="1">
       <mat-card class="dashboard-card">
@@ -13,86 +26,86 @@
       <mat-card-content> 
         <div class="row">
           <div class="col">
-            <dd class="col-sm-4">First Name</dd>
+            <dd >First Name</dd>
           </div>
           <div class="col">
-            <dt class="col-sm-8">{{starter.name}}</dt>
+            <dt >{{starter.name}}</dt>
           </div>
           <div class="col">
-            <dd class="col-sm-4">Last Name</dd>
+            <dd>Last Name</dd>
           </div>
           <div class="col">
-            <dt class="col-sm-8">'example</dt>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <dd class="col-sm-4">Job Title</dd>
-          </div>
-          <div class="col">
-            <dt class="col-sm-8">{{starter.jobTitle}}</dt>
-          </div>
-          <div class="col">
-            <dd class="col-sm-4">Employee Type</dd>
-          </div>
-          <div class="col">
-            <dt class="col-sm-8">{{starter.employeeType}}</dt>
+            <dt >'example</dt>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <dd class="col-sm-4">Division</dd>
+            <dd>Job Title</dd>
           </div>
           <div class="col">
-            <dt class="col-sm-8">{{starter.division}}</dt>
+            <dt >{{starter.jobTitle}}</dt>
           </div>
           <div class="col">
-            <dd class="col-sm-4">Department</dd>
+            <dd>Employee Type</dd>
           </div>
           <div class="col">
-            <dt class="col-sm-8">{{starter.department}}</dt>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <dd class="col-sm-4">Line Manager</dd>
-          </div>
-          <div class="col">
-            <dt class="col-sm-8">{{starter.lineManager}}</dt>
-          </div>
-          <div class="col">
-            <dd class="col-sm-4">Location</dd>
-          </div>
-          <div class="col">
-            <dt class="col-sm-8">{{starter.location}}</dt>
+            <dt >{{starter.employeeType}}</dt>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <dd class="col-sm-4">Floor</dd>
+            <dd>Division</dd>
           </div>
           <div class="col">
-            <dt class="col-sm-8">{{starter.floor}}</dt>
+            <dt >{{starter.division}}</dt>
           </div>
           <div class="col">
-            <dd class="col-sm-4">Company</dd>
+            <dd>Department</dd>
           </div>
           <div class="col">
-            <dt class="col-sm-8">{{starter.company}}</dt>
+            <dt >{{starter.department}}</dt>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <dd class="col-sm-4">Start Date</dd>
+            <dd>Line Manager</dd>
           </div>
           <div class="col">
-            <dt class="col-sm-8">{{starter.startDate}}</dt>
+            <dt >{{starter.lineManager}}</dt>
           </div>
           <div class="col">
-            <dd class="col-sm-4">State</dd>
+            <dd>Location</dd>
           </div>
           <div class="col">
-            <dt class="col-sm-8">{{starter.state}}</dt>
+            <dt >{{starter.location}}</dt>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <dd>Floor</dd>
+          </div>
+          <div class="col">
+            <dt >{{starter.floor}}</dt>
+          </div>
+          <div class="col">
+            <dd>Company</dd>
+          </div>
+          <div class="col">
+            <dt >{{starter.company}}</dt>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <dd>Start Date</dd>
+          </div>
+          <div class="col">
+            <dt >{{starter.startDate}}</dt>
+          </div>
+          <div class="col">
+            <dd>State</dd>
+          </div>
+          <div class="col">
+            <dt >{{starter.state}}</dt>
           </div>
         </div>
       </mat-card-content>

@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   getUserData(){
-    let user = JSON.parse(localStorage.getItem('user')).email;
+    let user = JSON.parse(localStorage.getItem('user'));
 
     return user;
   }

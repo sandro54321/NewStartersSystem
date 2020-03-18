@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { CommonService } from '../../../services/common.service'
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -7,6 +7,10 @@ import { BuildingAccess } from '../../../models/buildingAccess';
 import { SoftwareRequest } from '../../../models/softwareRequest'; 
 import { HardwareRequest } from '../../../models/hardwareRequest'; 
 
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
+import { FormBuilder, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-lm-add',
   templateUrl: './lm-add.component.html',
@@ -14,13 +18,34 @@ import { HardwareRequest } from '../../../models/hardwareRequest';
 })
 export class LmAddComponent implements OnInit {
 
-  //baRequests: Array<{country:String, building: String, floor: String, room: String, officeArea: Boolean, equiptmentArea: Boolean}> = [];
-  //softwareRequest: Array<{manufacturer:String, model: String, deviceType:String}> = [];
+  newBaForm = this.fb.group({
+    country: [null, Validators.required],
+    building: [null, Validators.required],
+    floor: [null, Validators.required],
+    room: [null, Validators.required],
+    equipmentArea: [null, Validators.required],
+    officeArea: [null, Validators.required]
+  });
+
+  newSrForm = this.fb.group({
+    supplier: [null, Validators.required],
+    description: [null, Validators.required],
+    accountType: [null, Validators.required],
+  });
+
+  newHrForm = this.fb.group({
+    manufacturer: [null, Validators.required],
+    model: [null, Validators.required],
+    deviceType: [null, Validators.required],
+  });
 
   constructor(
     public commonService:CommonService,
     public route:ActivatedRoute,
-    public router:Router
+    public router:Router,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<LmAddComponent>,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -29,26 +54,55 @@ export class LmAddComponent implements OnInit {
   
   model: Starter;
 
-  ba = new BuildingAccess();
+  BaColumns: string[] = ['building', 'floor', 'room' ,'equipmentArea', 'officeArea', 'state', 'actions'];
+  countries = ['Jersey', 'Guernsey', 'UK', 'USA', 'Denmark', 'Australia'];
+  buildings = ['Minden', 'Forum', 'Five Oaks', 'Brealades'];
+  floors = ['Ground', 'First', 'Second', 'Third'];
+  rooms = ['206', '207', '208'];
+
+  SrColumns: string[] = ['supplier', 'description', 'accountType', 'state', 'actions'];
+  suppliers = ['Microsoft', 'Apple'];
+  descriptions = ['Azure', 'Icloud'];
+  accountTypes = ['Standard', 'Admin'];
+
+  HrColumns: string[] = ['manufacturer', 'model', 'deviceType', 'state', 'actions'];
+  manufacturers = ['Dell', 'Apple'];
+  models = ['XPS 13', 'Macbook Air'];
+  deviceTypes = ['Laptop', 'Desktop'];
+
   sr = new SoftwareRequest();
   hr = new HardwareRequest();
- 
-  id = this.route.snapshot.params['id'];
+  tp = this.data.fType;
+  BaDataSource = new MatTableDataSource();
+  SrDataSource = new MatTableDataSource();
+  HrDataSource = new MatTableDataSource();
 
   getStarter(){
-    this.commonService.getStarter(this.id).subscribe(starter=> this.model = starter)
+    this.commonService.getStarter(this.data.id).subscribe(starter=> {this.model = starter})
   }
   
   addArray(name){
     //this.baRequests.push({country: this.ba.country, building: this.ba.building, floor: this.ba.floor, room: this.ba.floor, officeArea: false, equiptmentArea: true})
     if(name === 'ba'){
-    this.model.buildingAccess.push({_id: this.makeid(24), country: this.ba.country, building: this.ba.building, floor: this.ba.floor, room: this.ba.room, officeArea: this.ba.officeArea, equiptmentArea: this.ba.equiptmentArea, state: 'Open'})
+    var id = this.makeid(24);
+    this.model.buildingAccess.push({_id: id, country: this.newBaForm.get('country').value, building: this.newBaForm.get('building').value, floor: this.newBaForm.get('floor').value, room: this.newBaForm.get('room').value, officeArea: this.newBaForm.get('officeArea').value, equiptmentArea: this.newBaForm.get('equipmentArea').value, state: 'Open'});
+    this.BaDataSource.data.push({_id: id, country: this.newBaForm.get('country').value, building: this.newBaForm.get('building').value, floor: this.newBaForm.get('floor').value, room: this.newBaForm.get('room').value, officeArea: this.newBaForm.get('officeArea').value, equiptmentArea: this.newBaForm.get('equipmentArea').value, state: 'Open'});
+    this.BaDataSource.data = this.BaDataSource.data;
+    this.newBaForm.reset();
     console.table(this.model.buildingAccess);
     }else if(name === 'sr'){
-      this.model.softwareRequest.push({_id: this.makeid(24), supplier: this.sr.supplier, description: this.sr.description, accountType: this.sr.accountType, state: 'Open'});
+      var id = this.makeid(24);
+      this.model.softwareRequest.push({_id: id, supplier: this.newSrForm.get('supplier').value, description: this.newSrForm.get('description').value, accountType: this.newSrForm.get('accountType').value, state: 'Open'});
+      this.SrDataSource.data.push({_id: id, supplier: this.newSrForm.get('supplier').value, description: this.newSrForm.get('description').value, accountType: this.newSrForm.get('accountType').value, state: 'Open'});
+      this.SrDataSource.data = this.SrDataSource.data;
+      this.newSrForm.reset();
       console.table(this.model.softwareRequest);
     }else if(name === 'hr'){
-      this.model.hardwareRequest.push({_id: this.makeid(24), manufacturer: this.hr.manufacturer, model: this.hr.model, deviceType: this.hr.deviceType, state: 'Open'});
+      var id = this.makeid(24);
+      this.model.hardwareRequest.push({_id: id, manufacturer: this.newHrForm.get('manufacturer').value, model: this.newHrForm.get('model').value, deviceType: this.newHrForm.get('deviceType').value, state: 'Open'});
+      this.HrDataSource.data.push({_id: id, manufacturer: this.newHrForm.get('manufacturer').value, model: this.newHrForm.get('model').value, deviceType: this.newHrForm.get('deviceType').value, state: 'Open'});
+      this.HrDataSource.data = this.HrDataSource.data;
+      this.newHrForm.reset();
       console.table(this.model.hardwareRequest);
     }
   }
@@ -64,12 +118,34 @@ export class LmAddComponent implements OnInit {
  }
 
   updateStarter(){
-    this.commonService.updateStarter(this.id,this.model).subscribe(() => this.goBack())
+    this.commonService.updateStarter(this.data.id,this.model).subscribe(() => this.close())
   }
   
   goBack(){
     this.router.navigate(['/lm'])
   }
+
+  onRemove(id, type){
+    if(type == 'ba'){
+      var index = this.model.buildingAccess.findIndex(x => x._id == id);
+      this.model.buildingAccess.splice(index, 1);
+      this.BaDataSource.data = this.BaDataSource.data.splice(index, 1);
+    }else if( type == 'sr'){
+      var index = this.model.softwareRequest.findIndex(x => x._id == id);
+      this.model.softwareRequest.splice(index, 1);
+      this.SrDataSource.data = this.SrDataSource.data.splice(index, 1);
+    }else if( type == 'hr'){
+      var index = this.model.hardwareRequest.findIndex(x => x._id == id);
+      this.model.hardwareRequest.splice(index, 1);
+      this.HrDataSource.data = this.HrDataSource.data.splice(index, 1);
+    }
+
+  }
+
+close() {
+  console.log("Closing");
+  this.dialogRef.close('reload');
+}
 
 
 }

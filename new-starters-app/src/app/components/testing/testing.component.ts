@@ -44,8 +44,6 @@ export class TestingComponent {
     this.getStarter();
   }
 
-  name: String;
-  state: String
 
   getStarter(){
     var id = this.route.snapshot.params['id'];
@@ -55,6 +53,10 @@ export class TestingComponent {
 
   deleteStarter(id){
     this.commonService.deleteStarter(id).subscribe(()=>{this.getStarter();});
+  }
+
+  goBack(){
+    this.router.navigate(['/lm-home'])
   }
 
   

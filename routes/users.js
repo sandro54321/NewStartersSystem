@@ -38,15 +38,30 @@ router.post('/authenticate', (req,res) => {
             if(err) throw err;
             if(isMatch){
                 const token = jwt.sign({user:user}, config.secret, {
-                    expiresIn: 200000
+                    expiresIn: 6000000
                 });
                 console.log("authenticate route token: " + token);
-                res.json({success: true, token: 'bearer ' + token, user: {id: user._id, username: user.username, email: user.email}});
+                res.json({success: true, token: 'bearer ' + token, user: {id: user._id, name:user.name, username: user.username, email: user.email}});
             } else {
                 return res.json({success: false, msg: 'Wrong Password!'});
             }
         });
     });
+});
+
+
+//get all lm
+router.get('/lmall', passport.authenticate('jwt', {session:false}), function (req,res) {
+    User.getAllLineManagers(function (err, lineManagers){
+        if(err) throw err;
+        var data = [];
+
+        for (var i = 0; i < lineManagers.length; i++){
+            data.push(lineManagers[i].email);
+        }
+
+        res.json(data);
+    })
 });
 
 module.exports = router;

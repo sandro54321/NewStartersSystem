@@ -29,7 +29,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatNativeDateModule} from '@angular/material/core';
-
+import {MatCheckboxModule} from '@angular/material/checkbox'
 
 import {NgModule} from '@angular/core';
 
@@ -40,7 +40,6 @@ import {NgModule} from '@angular/core';
     MatCardModule,
     MatSliderModule,
     MatProgressBarModule,
-    MatAutocompleteModule,
     MatInputModule,
     MatGridListModule,
     MatSnackBarModule,
@@ -54,8 +53,10 @@ import {NgModule} from '@angular/core';
     MatSelectModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatNativeDateModule
-    
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    MatAutocompleteModule    
 
   ],
   exports: [
@@ -78,7 +79,10 @@ import {NgModule} from '@angular/core';
     MatSelectModule,
     BrowserAnimationsModule,    
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
 })
 

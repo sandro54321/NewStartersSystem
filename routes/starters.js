@@ -62,6 +62,13 @@ router.get('/it', passport.authenticate('jwt', {session:false}), function (req,r
     });
 });
 
+router.get('/property', passport.authenticate('jwt', {session:false}), function (req,res) {
+    Starter.getPropertyStarters(function (err, starters){
+        if(err) throw err;
+        res.json(starters);
+    });
+});
+
 //update
 router.put('/update/:_id', function(req,res){
     let updatedStarter = {

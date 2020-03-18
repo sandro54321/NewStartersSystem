@@ -28,6 +28,18 @@ export class CommonService {
     return this.http.get<Starter[]>("http://localhost:3000/starters/all").pipe(
         map(res => res));
   }
+  
+  getLineManagers(): Observable<string[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.authService.loadToken()
+      })
+    };
+
+    return this.http.get<string[]>("http://localhost:3000/users/lmall", httpOptions).pipe(
+        map(res => res));
+  }
 
   getLmItems(lmEmail): Observable<Starter[]>{
     
@@ -52,6 +64,19 @@ export class CommonService {
     };
 
     return this.http.get<Starter[]>("http://localhost:3000/starters/it/", httpOptions).pipe(
+        map(res => res));
+  }
+
+  getPropertyItems(): Observable<Starter[]>{
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.authService.loadToken()
+      })
+    };
+
+    return this.http.get<Starter[]>("http://localhost:3000/starters/property/", httpOptions).pipe(
         map(res => res));
   }
 

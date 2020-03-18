@@ -1,28 +1,36 @@
-.card{
-    border-radius:0;
-  }
-  .card-header{
-      cursor: pointer;
-      background: #DAD6F5;
-      border-radius:0;
-  }
-  .dark{
-      background: #212167;
-      color: #fff;
-  }
-  .img-thumbnail{
-    border-radius:0;
-    border:0;
-  }
-  .list-group-item{
-    border-left: none;
-    border-right: none;
-  }
-  .list-group-item:last-child,.list-group-item:first-child {
-    border-radius: 0;
-  }
-  .list-group-item:first-child {
-    border-top: none;
-  }.list-group-item:last-child {
-    border-bottom: none;
-  }
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+
+.grid-container {
+  background-color: #EDEDF1;
+}
+
+table {
+  width: 100%;
+}
+
+.td {
+  display: flex;
+  padding: 2px 0;
+  justify-content: flex-start;
+}
+

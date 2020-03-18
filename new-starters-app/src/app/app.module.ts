@@ -42,6 +42,10 @@ import { FormtestComponent } from './components/formtest/formtest.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { PropHomeComponent } from './components/prop-components/prop-home/prop-home.component';
+import { PropShowComponent } from './components/prop-components/prop-show/prop-show.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -57,7 +61,9 @@ const appRoutes: Routes = [
   {path: 'lm-show/:id', component: LmShowComponent},
   {path: 'it', component: ItHomeComponent, canActivate: [AuthGuard]},
   {path: 'it-show/:id', component: ItShowComponent, canActivate: [AuthGuard]},
-  {path: 'dash/:id', component: TestingComponent, canActivate: [AuthGuard]}
+  {path: 'dash/:id', component: TestingComponent, canActivate: [AuthGuard]},
+  {path: 'prop', component: PropHomeComponent, canActivate: [AuthGuard]},
+  {path: 'prop-show/:id', component: PropShowComponent, canActivate: [AuthGuard]},
 
 ] 
 
@@ -77,7 +83,10 @@ const appRoutes: Routes = [
     ItHomeComponent,
     TestingComponent,
     NavigationComponent,
-    FormtestComponent
+    FormtestComponent,
+    PropHomeComponent,
+    PropShowComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -99,10 +108,11 @@ const appRoutes: Routes = [
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   providers: [AuthService, CommonService, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [AddComponent]
+  entryComponents: [AddComponent, ConfirmDialogComponent]
 })
 export class AppModule { }

@@ -1,21 +1,38 @@
-.sidenav-container {
-  height: 100%;
+
+:host .mat-icon {
+  vertical-align: middle;
+  margin-right: 20px;
+  position: sticky !important;
+}
+:host .profile-card {
+  text-align: center;
+  padding: 0 20px 20px 20px;
+  position: sticky !important;
+}
+:host .profile-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: sticky !important;
 }
 
-.sidenav {
-  width: 300px;
+mat-drawer {
+  width:  350px;
+  
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
+mat-drawer-content {
+  height:  100%;
 }
 
-.mat-toolbar.mat-primary {
+.mat-toolbar {
   position: sticky;
-  top: 0;
-  z-index: 1;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
 
-.mat-sidenav-content {
-  background-color: #EDEDF1;
+ul li {
+  list-style: none;
 }
