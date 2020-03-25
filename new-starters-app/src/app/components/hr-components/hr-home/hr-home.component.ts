@@ -23,13 +23,22 @@ export class HrHomeComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'actions'];
   dataSource;
+  totalRequests: number;
+  openRequests: number;
+  completeRequests: number;
+  closedRequests: number;
 
   ngOnInit(): void {
     this.getStarters();
   }
 
   getStarters(){
-    this.commonService.getStarters().subscribe(starters=> {this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator;} )  
+    this.commonService.getStarters().subscribe(starters=> {
+      this.dataSource = new MatTableDataSource(starters); 
+      this.dataSource.sort = this.sort; 
+      this.dataSource.paginator = this.paginator;
+      this.getStats(starters)
+    } )  
   }
 
   deleteStarter(id){
@@ -65,12 +74,35 @@ export class HrHomeComponent implements OnInit {
     });
 
     ConfirmdialogRef.afterClosed().subscribe(dialogResult => {
-      if(dialogResult != false){
+      if(dialogResult !== false){
 
         this.deleteStarter(dialogResult);
-        
+
       }
     });
+  }
+
+  getStats(starters){
+    this.totalRequests = starters.length;
+
+    this.openRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].state == 'Open')
+        this.openRequests++;
+    }
+
+    this.completeRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].state == 'Complete')
+        this.completeRequests++;
+    }
+
+    this.closedRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].state == 'Closed')
+        this.closedRequests++;
+    }
+
   }
 
 }

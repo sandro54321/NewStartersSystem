@@ -9,6 +9,43 @@
     right: 15px;
     bottom: 15px;
   }
+
+  .dashboard-card-total {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    background-color: #62ABFF;
+  }
+
+
+  .dashboard-card-complete {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    background-color: #45DDBE;
+  }
+
+  .dashboard-card-open {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    background-color: #FFBE61;
+  }
+
+  .dashboard-card-closed {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    background-color: #FF6B84;
+  }
   
   .more-button {
     position: absolute;

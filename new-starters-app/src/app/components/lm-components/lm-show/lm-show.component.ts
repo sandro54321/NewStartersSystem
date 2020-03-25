@@ -62,7 +62,7 @@ export class LmShowComponent implements OnInit {
 
   onCreate(_id,type){
 
-    const dialogRef = this.dialog.open(LmAddComponent, {width: '900px', height: '900px', data: { id:  _id, fType: type}});
+    const dialogRef = this.dialog.open(LmAddComponent, {width: '900px', data: { id:  _id, fType: type}});
 
     dialogRef.afterClosed().subscribe(data => {if(data == "reload"){this.getStarter()}});
   }

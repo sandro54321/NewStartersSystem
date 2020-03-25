@@ -3,58 +3,58 @@
   <mat-grid-list cols="4" rowHeight="162.5px">
         
     <mat-grid-tile  [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="dashboard-card-total">
         <mat-card-header>
           <mat-card-title>
-            Graph
+            Total Requests
           </mat-card-title>
         </mat-card-header>
 
         <mat-card-content class="dashboard-card-content">
-         <p>testing</p>
+         <p>{{totalRequests}}</p>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
     
     <mat-grid-tile  [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="dashboard-card-complete">
         <mat-card-header>
           <mat-card-title>
-            Graph
+            Completed Requests
           </mat-card-title>
         </mat-card-header>
 
         <mat-card-content class="dashboard-card-content">
-         <p>testing</p>
+         <p>{{completeRequests}}</p>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile  [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="dashboard-card-open">
         <mat-card-header>
           <mat-card-title>
-            Graph
+            Open Requests
           </mat-card-title>
         </mat-card-header>
 
         <mat-card-content class="dashboard-card-content">
-         <p>testing</p>
+         <p>{{openRequests}}</p>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
 
     
     <mat-grid-tile  [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="dashboard-card-closed">
         <mat-card-header>
           <mat-card-title>
-            Graph
+            Closed Requests
           </mat-card-title>
         </mat-card-header>
 
         <mat-card-content class="dashboard-card-content">
-         <p>testing</p>
+         <p>{{closedRequests}}</p>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
