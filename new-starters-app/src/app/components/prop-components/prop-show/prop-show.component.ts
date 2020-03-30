@@ -47,7 +47,19 @@ export class PropShowComponent implements OnInit {
     onClick(id, state){
         var index = this.starter.buildingAccess.findIndex(x => x._id == id);
         this.starter.buildingAccess[index].state = state;
-        this.updateStarter();     
+
+        var x = 0;
+       for (var i=0; i < this.starter.buildingAccess.length; i++) {
+          if (this.starter.buildingAccess[i].state != 'Open') {
+            x++;
+            if (x == this.starter.buildingAccess.length){
+              this.starter.baComplete = true;
+              this.starter.propertyState = 'Complete'
+              this.updateStarter(); 
+              this.commonService.checkIfComplete(this.starter._id).subscribe(data => console.log(data))
+            }
+          }
+        }
 
     }
 

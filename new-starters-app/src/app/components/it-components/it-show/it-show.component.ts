@@ -22,6 +22,9 @@ export class ItShowComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   starter: Starter
+  ItState: String
+  softwareComplete: Boolean
+  hardwareComplete: Boolean
   SrDataSource;
   HrDataSource;
   SrColumns: string[] = ['supplier', 'description', 'accountType', 'state', 'actions'];
@@ -47,7 +50,7 @@ export class ItShowComponent implements OnInit {
       this.commonService.getStarter(this.id).subscribe(starters=> {
         this.starter = starters; 
         this.SrDataSource = new MatTableDataSource(starters.softwareRequest); 
-        console.log(this.SrDataSource);
+        //console.log(this.SrDataSource);
         this.SrDataSource.sort = this.sort; 
         this.HrDataSource = new MatTableDataSource(starters.hardwareRequest); 
         this.HrDataSource.sort = this.sort;
@@ -59,13 +62,45 @@ export class ItShowComponent implements OnInit {
 
       if(type == 'sr'){
         var index = this.starter.softwareRequest.findIndex(x => x._id == id);
-        this.starter.softwareRequest[index].state = state;
-        this.updateStarter();     
+        this.starter.softwareRequest[index].state = state;    
+        this.updateStarter();
        }else if(type =='hr'){
         var index = this.starter.hardwareRequest.findIndex(x => x._id == id);
         this.starter.hardwareRequest[index].state = state;
-        this.updateStarter(); 
+        this.updateStarter();
        }
+
+       var x = 0;
+       for (var i=0; i < this.starter.softwareRequest.length; i++) {
+          if (this.starter.softwareRequest[i].state != 'Open') {
+            x++;
+            if (x == this.starter.softwareRequest.length){
+              this.starter.srComplete = true;
+              this.updateStarter();
+              this.commonService.checkIfComplete(this.starter._id).subscribe(data => console.log(data))
+            }
+          }
+        }
+
+        var y = 0;
+        for (var i=0; i < this.starter.hardwareRequest.length; i++) {
+          if (this.starter.hardwareRequest[i].state != 'Open') {
+            y++;
+            if (y == this.starter.hardwareRequest.length){
+              this.starter.hrComplete = true;
+              this.updateStarter();
+              this.commonService.checkIfComplete(this.starter._id);
+            }
+          }
+        }
+
+        if(this.starter.hrComplete == true && this.starter.srComplete == true){
+          this.starter.ItState = 'Complete'
+          this.updateStarter();
+        }
+        
+
+
     }
 
     updateStarter(){
@@ -76,7 +111,11 @@ export class ItShowComponent implements OnInit {
       this.commonService.addUserAd(starter).subscribe(response => {console.log(response)});
     }
 
+    testEmail(){
+      //this.commonService.sendEmail('test').subscribe(response => {console.log(response)})
+    }
+
     goBack(){
       this.router.navigate(['/it'])
-    }
+    } 
 }

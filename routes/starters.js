@@ -17,7 +17,8 @@ router.post('/add', (req,res) => {
 
     let newStarter = new Starter({
         dateCreated: today,
-        name: req.body.name, 
+        firstName: req.body.firstName, 
+        lastName: req.body.lastName, 
         email: req.body.email,
         jobTitle: req.body.jobTitle,
         employeeType: req.body.employeeType,
@@ -29,13 +30,16 @@ router.post('/add', (req,res) => {
         company: req.body.company,
         startDate: req.body.startDate,
         state: "Open",
+        baComplete: false,
+        srComplete: false,
+        hrComplete: false,
     });
 
     Starter.addStarter(newStarter, (err, user) => {
         if(err){
             res.json({success: false, msg:'Failed to register user'})
         }else{
-            res.json({success: true, msg: newStarter.name + 'User Registered'})
+            res.json({success: true, msg: newStarter.firstName + ' User Registered'})
         }
     })
 });
@@ -73,7 +77,8 @@ router.get('/property', passport.authenticate('jwt', {session:false}), function 
 router.put('/update/:_id', function(req,res){
     let updatedStarter = {
         dateCreated: req.body.dateCreated,
-        name: req.body.name, 
+        firstName: req.body.firstName, 
+        lastName: req.body.lastName, 
         email: req.body.email,
         jobTitle: req.body.jobTitle,
         employeeType: req.body.employeeType,
@@ -85,6 +90,11 @@ router.put('/update/:_id', function(req,res){
         company: req.body.company,
         startDate: req.body.startDate,
         state: req.body.state,
+        propertyState: req.body.propertyState,
+        ItState: req.body.ItState,
+        baComplete: req.body.baComplete,
+        srComplete: req.body.srComplete,
+        hrComplete: req.body.hrComplete,
         buildingAccess: req.body.buildingAccess,
         softwareRequest: req.body.softwareRequest,
         hardwareRequest: req.body.hardwareRequest
@@ -109,6 +119,30 @@ router.delete('/delete/:_id', function(req,res){
         res.json(starter);
     })
 })
+
+router.post('/state', (req,res) => {
+    console.log(req.body);
+    Starter.GetStarterByID(req.body._id,(err, user) => {
+        if(err){
+            res.json({success: false, msg:'Failed to find user'})
+        }else if (user){
+            console.log('got user');
+            if(user.baComplete === true && user.srComplete === true && user.hrComplete === true){
+                console.log('all states complete');
+                Starter.updateFeild(user._id, 'Complete', function(err,starter){
+                    if(err) throw err;
+                    console.log('set to complete')
+                    res.json({success: true, msg:'State Updated to Complete'});
+                })
+            }else{
+                res.json({success: true, msg:'Not All Requests Complete'})
+                console.log("lol")
+            }
+        }
+    })
+}
+
+)
 
 
 

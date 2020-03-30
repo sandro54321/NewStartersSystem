@@ -21,6 +21,10 @@ export class PropHomeComponent implements OnInit {
   email:String;
   name:String;
   starters:Starter[];
+  totalRequests: number;
+  openRequests: number;
+  completeRequests: number;
+  closedRequests: number;
 
   displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'actions'];
   dataSource;

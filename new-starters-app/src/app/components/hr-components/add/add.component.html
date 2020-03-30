@@ -137,7 +137,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="warn"  (click)="close()">Cancel</button>
-      <button mat-raised-button color="primary" type="submit" ng-disabled="newStarterForm.$invalid">Submit</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="newStarterForm.invalid">Submit</button>
     </mat-card-actions>
   </mat-card>
 </form>

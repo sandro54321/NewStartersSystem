@@ -27,6 +27,14 @@
     right: 15px;
     bottom: 15px;
     background-color: #45DDBE;
+    text-align: center;
+  }
+  
+  .statIcon{
+    font-size: 40px;
+  }
+  .statText{
+    font-size: 30px;
   }
 
   .dashboard-card-open {

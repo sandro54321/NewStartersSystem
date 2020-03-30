@@ -23,6 +23,11 @@ export class LmHomeComponent implements OnInit {
   email:String;
   name:String;
   starters:Starter[];
+  totalRequests: number;
+  openRequests: number;
+  completeRequests: number;
+  closedRequests: number;
+
 
   displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'actions'];
   dataSource;
@@ -40,7 +45,7 @@ export class LmHomeComponent implements OnInit {
   }
 
   getLmItems(){ 
-    this.commonService.getLmItems(this.email).subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator;})
+    this.commonService.getLmItems(this.email).subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator; this.getStats(starters)})
   }
   
   applyFilter(event: Event) {
@@ -48,5 +53,27 @@ export class LmHomeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  getStats(starters){
+    this.totalRequests = starters.length;
+
+    this.openRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].state == 'Open')
+        this.openRequests++;
+    }
+
+    this.completeRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].state == 'Complete')
+        this.completeRequests++;
+    }
+
+    this.closedRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].state == 'Closed')
+        this.closedRequests++;
+    }
+
+  }
 
 }

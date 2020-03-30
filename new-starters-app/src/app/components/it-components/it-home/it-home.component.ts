@@ -21,6 +21,11 @@ export class ItHomeComponent implements OnInit {
   email:String;
   name:String;
   starters:Starter[];
+  ItState:String;
+  totalRequests: number;
+  openRequests: number;
+  completeRequests: number;
+  closedRequests: number;
 
   displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'actions'];
   dataSource;
@@ -36,13 +41,36 @@ export class ItHomeComponent implements OnInit {
 
 
   getItItems(){ 
-    this.commonService.getItItems().subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator})
+    this.commonService.getItItems().subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator; this.getStats(starters)})
   }
 
     
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+    getStats(starters){
+    this.totalRequests = starters.length;
+
+    this.openRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].ItState == 'Open')
+        this.openRequests++;
+    }
+
+    this.completeRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].ItState == 'Complete')
+        this.completeRequests++;
+    }
+
+    this.closedRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].ItState == 'Closed')
+        this.closedRequests++;
+    }
+
   }
   
 }

@@ -20,6 +20,52 @@
   text-align: center;
 }
 
+.dashboard-card-total {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  background-color: #62ABFF;
+}
+
+
+.dashboard-card-complete {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  background-color: #45DDBE;
+  text-align: center;
+}
+
+.statIcon{
+  font-size: 40px;
+}
+.statText{
+  font-size: 30px;
+}
+
+.dashboard-card-open {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  background-color: #FFBE61;
+}
+
+.dashboard-card-closed {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  background-color: #FF6B84;
+}
+
+
 table {
   width: 100%;
 }

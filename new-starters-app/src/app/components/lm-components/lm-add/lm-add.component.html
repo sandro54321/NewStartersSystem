@@ -62,7 +62,7 @@
             <mat-card-actions>
               <button mat-raised-button color="warn"  (click)="close()">Cancel</button>
               <button mat-raised-button color="primary" [disabled]="newBaForm.invalid" (click)="addArray('ba')">Add</button>
-              <button mat-raised-button color="primary" type="submit" [disabled]="model.buildingAccess.length < 1">Save</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="BaDataSource.data.length === 0">Save</button>
             </mat-card-actions>
           </mat-card>
         </form>
@@ -102,8 +102,8 @@
 
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
-            <td mat-cell *matCellDef="let element" align="left"> 
-              <mat-icon (click)="onRemove(element._id, 'ba')">delete</mat-icon>
+            <td mat-cell *matCellDef="let element; let i = index" align="left"> 
+              <mat-icon (click)="onRemove(i, 'ba')">delete</mat-icon>
             </td>
           </ng-container> 
 
@@ -161,7 +161,7 @@
           <mat-card-actions>
             <button mat-raised-button color="warn"  (click)="close()">Cancel</button>
             <button mat-raised-button color="primary" [disabled]="newSrForm.invalid" (click)="addArray('sr')">Add</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="model.softwareRequest.length < 1">Save</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="SrDataSource.data.length === 0">Save</button>
           </mat-card-actions>
         </mat-card>
       </form>
@@ -191,8 +191,8 @@
 
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let element" align="left"> 
-            <mat-icon (click)="onRemove(element._id, 'sr')">delete</mat-icon>
+          <td mat-cell *matCellDef="let element; let i = index" align="left"> 
+            <mat-icon (click)="onRemove(i, 'sr')">delete</mat-icon>
           </td>
         </ng-container> 
 
@@ -249,7 +249,7 @@
         <mat-card-actions>
           <button mat-raised-button color="warn"  (click)="close()">Cancel</button>
           <button mat-raised-button color="primary" [disabled]="newHrForm.invalid" (click)="addArray('hr')">Add</button>
-          <button mat-raised-button color="primary" type="submit" [disabled]="model.hardwareRequest.length < 1">Save</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="HrDataSource.data.length === 0">Save</button>
         </mat-card-actions>
       </mat-card>
     </form>
@@ -279,8 +279,8 @@
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element" align="left"> 
-          <mat-icon (click)="onRemove(element._id, 'hr')">delete</mat-icon>
+        <td mat-cell *matCellDef="let element; let i = index" align="left"> 
+          <mat-icon (click)="onRemove(i, 'hr')">delete</mat-icon>
         </td>
       </ng-container> 
 

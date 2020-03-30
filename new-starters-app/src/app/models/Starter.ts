@@ -1,7 +1,8 @@
 export class Starter {
     _id:String;
     dateCreated:String;
-    name:String;
+    firstName:String;
+    lastName:String;
     email:String;
     jobTitle:String;
     employeeType:String;
@@ -13,6 +14,11 @@ export class Starter {
     company:String;
     startDate:String;
     state:String;
+    ItState:String;
+    propertyState:String
+    baComplete: Boolean;
+    srComplete: Boolean;
+    hrComplete: Boolean;
     buildingAccess: Array<{_id: String, country:String,building:String, floor:String, room:String, officeArea:Boolean, equiptmentArea: Boolean, state: String}> = [];
     softwareRequest: Array<{_id: String, supplier:String,description:String,accountType:String, state: String}> = [];
     hardwareRequest: Array<{_id: String, manufacturer:String,model:String,deviceType:String, state: String}> = [];

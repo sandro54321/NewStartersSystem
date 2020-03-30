@@ -9,6 +9,7 @@
       </div>
       <div>
         <button  mat-raised-button color="primary"  (click)="userAD(starter)" >Create AD</button> 
+        <button  mat-raised-button color="primary"  (click)="testEmail()" >email</button> 
       </div>
     </div>
 
@@ -27,13 +28,13 @@
               <dd >First Name</dd>
             </div>
             <div class="col">
-              <dt >{{starter.name}}</dt>
+              <dt >{{starter.firstName}}</dt>
             </div>
             <div class="col">
               <dd>Last Name</dd>
             </div>
             <div class="col">
-              <dt >'example</dt>
+              <dt >{{starter.lastName}}</dt>
             </div>
           </div>
           <div class="row">
@@ -103,7 +104,7 @@
               <dd>State</dd>
             </div>
             <div class="col">
-              <dt >{{starter.state}}</dt>
+              <dt >{{starter.ItState}}</dt>
             </div>
           </div>
         </mat-card-content>

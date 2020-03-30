@@ -7,7 +7,11 @@ const StarterSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    name:{
+    firstName:{
+        type: String,
+        required: true
+    },
+    lastName:{
         type: String,
         required: true
     },
@@ -54,6 +58,21 @@ const StarterSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    propertyState:{
+        type: String
+    },
+    baComplete:{
+        type: Boolean
+    },
+    srComplete:{
+        type: Boolean
+    },
+    hrComplete:{
+        type: Boolean
+    },
+    ItState:{
+        type: String
+    },
     buildingAccess:[{
         _id:String,
         country: String,
@@ -88,8 +107,8 @@ module.exports.GetStarterByID = function(id, callback){
     //Starter.findById(id, callback);
 }
 
-module.exports.GetStarterByName = function(name, callback){
-    const query = {name: name}
+module.exports.GetStarterByName = function(firstName, lastName, callback){
+    const query = {firstName: firstName, lastName: lastName}
     Starter.findOne(query, callback);
 }
 
@@ -141,4 +160,10 @@ module.exports.getStarter = function(id, callback){
     //Starter.findById(id, callback);
     Starter.findById(id, callback);
 }
+
+module.exports.updateFeild = function(id, value , callback){
+    Starter.findByIdAndUpdate(id, {$set:{"state" : value}}, callback)
+    console.log(callback);
+}
+
 

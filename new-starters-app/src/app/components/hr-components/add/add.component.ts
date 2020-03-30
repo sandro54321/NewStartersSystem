@@ -1,5 +1,6 @@
 import { Component, OnInit,  } from '@angular/core';
 import { CommonService } from '../../../services/common.service'
+import { EmailService } from '../../../services/email.service'
 import { Starter } from '../../../models/Starter'; 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -17,6 +18,7 @@ import {map, startWith} from 'rxjs/operators';
 export class AddComponent implements OnInit {
 
   constructor(
+    public emailService:EmailService,
     public commonService:CommonService,
     public route:ActivatedRoute,
     public router:Router,
@@ -32,7 +34,7 @@ export class AddComponent implements OnInit {
   newStarterForm = this.fb.group({
     firstName: [null, Validators.required],
     lastName: [null, Validators.required],
-    email: [null, Validators.required],
+    email: [null, Validators.email],
     jobTitle: [null, Validators.required],
     employeeType: [null, Validators.required],
     division: [null, Validators.required],
@@ -41,7 +43,7 @@ export class AddComponent implements OnInit {
     floor: [null, Validators.required],
     company: [null, Validators.required],
     lineManager: [null, Validators.required],
-    startDate: [null, Validators.required]
+    startDate: [null, Validators.required],
   });
   
   divisions = ['CTS', 'HR', 'Finance'];
@@ -77,7 +79,8 @@ export class AddComponent implements OnInit {
   }
 
   addStarter(){
-    this.model.name = this.newStarterForm.get('firstName').value;
+    this.model.firstName = this.newStarterForm.get('firstName').value;
+    this.model.lastName = this.newStarterForm.get('lastName').value;
     this.model.email = this.newStarterForm.get('email').value;
     this.model.jobTitle = this.newStarterForm.get('jobTitle').value;
     this.model.employeeType = this.newStarterForm.get('employeeType').value;
@@ -92,7 +95,9 @@ export class AddComponent implements OnInit {
 
     console.table(this.model);
 
-    this.commonService.addStarter(this.model).subscribe(()=> this.close())
+    this.commonService.addStarter(this.model).subscribe(()=> console.log())
+    this.sendEmail(this.model);
+
   }
 
   formatDate(date){
@@ -119,6 +124,10 @@ export class AddComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  sendEmail(starter){
+    this.emailService.sendLmEmailCreated(starter).subscribe(response => {console.log(response)})
   }
 
 } 

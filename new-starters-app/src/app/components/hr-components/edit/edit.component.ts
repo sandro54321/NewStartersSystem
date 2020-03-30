@@ -69,8 +69,8 @@ export class EditComponent implements OnInit {
     this.commonService.getStarter(this.data.id).subscribe(starter=> 
       {this.model = starter,  
         this.newStarterForm.setValue(
-          {firstName: this.model.name, 
-            lastName: 'testing2', 
+          {firstName: this.model.firstName, 
+            lastName: this.model.lastName, 
             email: this.model.email, 
             jobTitle: this.model.jobTitle ,
             employeeType: this.model.employeeType,
@@ -86,8 +86,8 @@ export class EditComponent implements OnInit {
   }
   
   updateStarter(){
-    console.log("hello");
-    this.model.name = this.newStarterForm.get('firstName').value;
+    this.model.firstName = this.newStarterForm.get('firstName').value;
+    this.model.lastName = this.newStarterForm.get('lastName').value;
     this.model.email = this.newStarterForm.get('email').value;
     this.model.jobTitle = this.newStarterForm.get('jobTitle').value;
     this.model.employeeType = this.newStarterForm.get('employeeType').value;

@@ -115,5 +115,38 @@ export class CommonService {
 
     return this.http.request(req);
   }
+
+  sendEmail(starter, type){
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200'
+      })
+    };
+
+    var postURL = "https://prod-43.westeurope.logic.azure.com:443/workflows/0e1cb28ee58c4e169569686a73346797/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=HQ-H0CJXfHahxDxHWXK-LFpsxZseaJCBAKXyQ9LUWU8";
+
+    const data = {
+      type:type,
+      stater: starter
+    }
+
+    console.log(JSON.stringify(data));
+    
+    const req = new HttpRequest('POST', postURL, data ,httpOptions);
+
+    return this.http.request(req);
+
+  }
+
+  checkIfComplete(_id): Observable<any> {
+    console.log("check com", _id)
+    const data = {
+      _id: _id,
+    }
+    return this.http.post("http://localhost:3000/starters/state", data).pipe(map(res => res))
+
+  }
       
 }
