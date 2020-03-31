@@ -11,13 +11,14 @@ export class StatisticsService {
   starters:Starter[];
   startersLength;
   departments: Array<{name:String, data:number[]}> = [];
+  numRequestsPerDep: Array<{name:String, y:number}> = [];
 
   constructor(public commonService:CommonService) { }
 
   StatusByDepartment(): Observable<any[]> {
     return this.commonService.getStarters()
     .pipe(
-      map(starters=> { console.log(starters);
+      map(starters=> {
       for (var i=0; i < starters.length; i++) {
         let Open = 0; let Complete = 0; let Closed = 0; let dep = null; let Index = null;
         if (starters[i].state === 'Open') {
@@ -59,13 +60,27 @@ export class StatisticsService {
         }
 
       }
-      console.log(this.departments);
       return this.departments; 
     })) ;
-
-    
   };
 
-  
+  NumberOfRequestsByDepartment(): Observable<any[]>{
+    return this.commonService.getStarters()
+    .pipe(
+      map(starters=> {console.log(starters);
+      for (var i=0; i < starters.length; i++) {
+        let dep = null; let Ind = null; 
+        dep = starters[i].department
+        Ind = this.numRequestsPerDep.findIndex(x => x.name == dep);
+        if(Ind != -1){
+          this.numRequestsPerDep[Ind].y = this.numRequestsPerDep[Ind].y +1;
+        }else if (Ind === -1){
+          this.numRequestsPerDep.push({name: dep, y: 1});
+        }
+      }
+      console.log('test', this.numRequestsPerDep);
+      return this.numRequestsPerDep; 
+    })) ;
+  };  
 
 }

@@ -47,9 +47,10 @@ import { PropShowComponent } from './components/prop-components/prop-show/prop-s
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { HrStatsComponent } from './components/hr-components/hr-stats/hr-stats/hr-stats.component';
-import { BarChartComponent } from './components/charts/barChart/bar-chart/bar-chart.component';
+import { BarChartComponent } from './components/charts/bar-chart/bar-chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StatisticsService } from './services/statistics.service';
+import { PieChartComponent } from './components/charts/pie-chart/pie-chart.component';
 
 
 
@@ -94,7 +95,8 @@ const appRoutes: Routes = [
     PropShowComponent,
     ConfirmDialogComponent,
     HrStatsComponent,
-    BarChartComponent
+    BarChartComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
