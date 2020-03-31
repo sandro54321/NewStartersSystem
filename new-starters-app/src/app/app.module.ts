@@ -46,6 +46,10 @@ import { PropHomeComponent } from './components/prop-components/prop-home/prop-h
 import { PropShowComponent } from './components/prop-components/prop-show/prop-show.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import { HrStatsComponent } from './components/hr-components/hr-stats/hr-stats/hr-stats.component';
+import { BarChartComponent } from './components/charts/barChart/bar-chart/bar-chart.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { StatisticsService } from './services/statistics.service';
 
 
 
@@ -64,6 +68,8 @@ const appRoutes: Routes = [
   {path: 'dash/:id', component: TestingComponent, canActivate: [AuthGuard]},
   {path: 'prop', component: PropHomeComponent, canActivate: [AuthGuard]},
   {path: 'prop-show/:id', component: PropShowComponent, canActivate: [AuthGuard]},
+  {path: 'chart', component: HrStatsComponent, canActivate: [AuthGuard]},
+
 
 ] 
 
@@ -86,7 +92,9 @@ const appRoutes: Routes = [
     FormtestComponent,
     PropHomeComponent,
     PropShowComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    HrStatsComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -109,9 +117,13 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HighchartsChartModule
   ],
-  providers: [AuthService, CommonService, AuthGuard],
+  exports: [
+    BarChartComponent
+  ],
+  providers: [AuthService, CommonService, AuthGuard, StatisticsService],
   bootstrap: [AppComponent],
   entryComponents: [AddComponent, ConfirmDialogComponent]
 })
