@@ -19,6 +19,7 @@ export class BarChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
     this.barChartOptions = {
       chart: {
           type: 'column'
@@ -43,14 +44,29 @@ export class BarChartComponent implements OnInit {
               text: '# of Requests'
           }
       },
+      legend: {
+        itemStyle: {
+           font: '9pt Trebuchet MS, Verdana, sans-serif',
+           color: '#A0A0A0'
+        },
+        itemHoverStyle: {
+           color: '#FFF'
+        },
+        itemHiddenStyle: {
+           color: '#444'
+        }
+
+  },
+  
       tooltip: {
         headerFormat: '<span style="font-size:12px">{point.key}</span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
       },
+      
       plotOptions: {
           column: {
               pointPadding: 0.2,

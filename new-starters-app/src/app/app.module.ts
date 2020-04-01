@@ -51,6 +51,7 @@ import { BarChartComponent } from './components/charts/bar-chart/bar-chart.compo
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StatisticsService } from './services/statistics.service';
 import { PieChartComponent } from './components/charts/pie-chart/pie-chart.component';
+import { LineChartComponent } from './components/charts/line-chart/line-chart.component';
 
 
 
@@ -96,7 +97,8 @@ const appRoutes: Routes = [
     ConfirmDialogComponent,
     HrStatsComponent,
     BarChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,

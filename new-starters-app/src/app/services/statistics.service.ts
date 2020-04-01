@@ -12,6 +12,7 @@ export class StatisticsService {
   startersLength;
   departments: Array<{name:String, data:number[]}> = [];
   numRequestsPerDep: Array<{name:String, y:number}> = [];
+  numRequestsPerMonth: [];
 
   constructor(public commonService:CommonService) { }
 
@@ -82,5 +83,16 @@ export class StatisticsService {
       return this.numRequestsPerDep; 
     })) ;
   };  
+
+  NumberOfRequestsPerMonth(): Observable<any[]>{
+    return this.commonService.getStarters().pipe(map(starters=> {
+      for (var i=0; i < starters.length; i++) {
+        let month = null;
+        let stringDate = starters[i].dateCreated;
+      }
+
+      return this.numRequestsPerMonth; 
+    }));
+  }
 
 }

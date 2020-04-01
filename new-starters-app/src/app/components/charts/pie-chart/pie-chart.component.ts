@@ -25,11 +25,14 @@ export class PieChartComponent implements OnInit {
     plotShadow: false,
     type: 'pie'
 },
+yAxis: {
+  allowDecimals: false
+},
 title: {
-    text: 'Browser market shares in January, 2018'
+    text: 'Requests Per Department'
 },
 tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: <b>{point.y}</b>'
 },
 accessibility: {
     point: {
@@ -45,6 +48,19 @@ plotOptions: {
         },
         showInLegend: true
     }
+},
+legend: {
+  itemStyle: {
+     font: '9pt Trebuchet MS, Verdana, sans-serif',
+     color: '#A0A0A0'
+  },
+  itemHoverStyle: {
+     color: '#FFF'
+  },
+  itemHiddenStyle: {
+     color: '#444'
+  }
+
 },
 series: [{
     name: 'Brands',
