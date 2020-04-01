@@ -8,15 +8,15 @@ const config = require('../config/database');
 
 //add
 router.post('/add', (req,res) => {
-    var today = new Date();
+/*     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
 
-    today = dd + '/' + mm + '/' + yyyy;
+    today = dd + '/' + mm + '/' + yyyy; */
 
     let newStarter = new Starter({
-        dateCreated: today,
+        dateCreated: new Date(),
         firstName: req.body.firstName, 
         lastName: req.body.lastName, 
         email: req.body.email,

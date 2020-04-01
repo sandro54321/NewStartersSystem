@@ -16,9 +16,12 @@ export class LineChartComponent implements OnInit {
 
   @Input() data = [];
 
+
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.data);
 
     this.lineChartOptions = {
       chart: {
@@ -39,7 +42,7 @@ export class LineChartComponent implements OnInit {
           },
           labels: {
               formatter: function () {
-                  return this.value + '°';
+                  return this.value;
               }
           }
       },
@@ -58,7 +61,7 @@ export class LineChartComponent implements OnInit {
       },
       series: [{
           name: 'New Requests',
-          data: [7.0, 6.9, 9.5, 14.5, 18.2, 0, 25.2,23.3, 18.3, 13.9, 9.6, 10]
+          data: this.data
       }]
     }
   }

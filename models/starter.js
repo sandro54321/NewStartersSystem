@@ -4,7 +4,7 @@ const config = require('../config/database');
 //starter Schemea 
 const StarterSchema = mongoose.Schema({
     dateCreated:{
-        type: String,
+        type: Date,
         required: true
     },
     firstName:{
@@ -51,7 +51,7 @@ const StarterSchema = mongoose.Schema({
         required: true
     },
     startDate:{
-        type: String,
+        type: Date,
         required: true
     },
     state:{

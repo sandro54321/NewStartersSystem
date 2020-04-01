@@ -90,7 +90,7 @@ export class AddComponent implements OnInit {
     this.model.floor = this.newStarterForm.get('floor').value;
     this.model.company = this.newStarterForm.get('company').value;
     this.model.lineManager = this.newStarterForm.get('lineManager').value;
-    this.model.startDate = this.formatDate(this.newStarterForm.get('startDate').value);
+    this.model.startDate = this.newStarterForm.get('startDate').value
     this.model.state = "Open";
 
     console.table(this.model);
@@ -98,17 +98,6 @@ export class AddComponent implements OnInit {
     this.commonService.addStarter(this.model).subscribe(()=> console.log())
     this.sendEmail(this.model);
 
-  }
-
-  formatDate(date){
-    var oldDate = new Date(date);
-    var dd = String(oldDate.getDate()).padStart(2, '0');
-    var mm = String(oldDate.getMonth() + 1).padStart(2, '0');
-    var yyyy = oldDate.getFullYear();
-
-    var newDate = dd + '/' + mm + '/' + yyyy;
-
-    return newDate;
   }
 
   filterDepartmentsByDivision(division) {

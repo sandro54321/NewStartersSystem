@@ -19,7 +19,7 @@ export class HrStatsComponent implements OnInit {
   ngOnInit(): void {
     this.statisticsService.StatusByDepartment().subscribe(data => {this.StatusByDepartment = data;});
     this.statisticsService.NumberOfRequestsByDepartment().subscribe(data => {this.NumberOfRequestsByDepartment = data;});
-    this.statisticsService.NumberOfRequestsPerMonth().subscribe(data => {this.NumberOfRequestsPerMonth = data;});
+    this.statisticsService.NumberOfRequestsPerMonth().subscribe(data => {this.NumberOfRequestsPerMonth = data; console.log(this.NumberOfRequestsPerMonth)});
 
   }
 

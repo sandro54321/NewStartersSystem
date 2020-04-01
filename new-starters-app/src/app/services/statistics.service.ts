@@ -86,12 +86,37 @@ export class StatisticsService {
 
   NumberOfRequestsPerMonth(): Observable<any[]>{
     return this.commonService.getStarters().pipe(map(starters=> {
+      let jan = 0, feb = 0, mar = 0, apr = 0, may = 0, jun = 0, jul = 0, aug = 0, sep = 0, oct = 0, nov = 0, dec = 0;
       for (var i=0; i < starters.length; i++) {
-        let month = null;
-        let stringDate = starters[i].dateCreated;
+        //let jan = null, feb = null, mar = null, apr = null, may = null, jun = null, jul = null, aug = null, sep = null, oct = null, nov = null, dec = null;
+        let month = new Date(starters[i].dateCreated).getMonth();
+        if (month === 0){
+          jan++;
+        } else if(month === 1){
+          feb++;
+        } else if(month === 2){
+          mar++;
+        } else if(month === 3){
+          apr++;
+        } else if(month === 4){
+          may++;
+        } else if(month === 5){
+          jun++;
+        } else if(month === 6){
+          jul++;
+        } else if(month === 7){
+          aug++;
+        } else if(month === 8){
+          sep++;
+        } else if(month === 9){
+          oct++;
+        } else if(month === 10){
+          nov++;
+        } else if(month === 11){
+          dec++;
+        }
       }
-
-      return this.numRequestsPerMonth; 
+      return [jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec]; 
     }));
   }
 

@@ -1,6 +1,6 @@
 export class Starter {
     _id:String;
-    dateCreated:String;
+    dateCreated:Date;
     firstName:String;
     lastName:String;
     email:String;
@@ -12,7 +12,7 @@ export class Starter {
     location:String;
     floor:String;
     company:String;
-    startDate:String;
+    startDate:Date;
     state:String;
     ItState:String;
     propertyState:String

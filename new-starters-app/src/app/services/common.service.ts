@@ -148,5 +148,17 @@ export class CommonService {
     return this.http.post("http://localhost:3000/starters/state", data).pipe(map(res => res))
 
   }
+
+  formatDate(date){
+    var oldDate = date;
+    var dd = String(oldDate.getDate()).padStart(2, '0');
+    var mm = String(oldDate.getMonth() + 1).padStart(2, '0');
+    var yyyy = oldDate.getFullYear();
+
+    var newDate = dd + '/' + mm + '/' + yyyy;
+
+    return newDate;
+  }
+
       
 }
