@@ -21,7 +21,6 @@ export class LineChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.data);
 
     this.lineChartOptions = {
       chart: {
