@@ -13,6 +13,8 @@ export class StatisticsService {
   departments: Array<{name:String, data:number[]}> = [];
   numRequestsPerDep: Array<{name:String, y:number}> = [];
   numRequestsPerMonth: [];
+  divisions: String[] = [];
+  numRequestsPerDivAndDep: Array<{divisions: String[], departments:Array<{deparrtment:string, data:number}>}> = [];
 
   constructor(public commonService:CommonService) { }
 
@@ -117,6 +119,29 @@ export class StatisticsService {
         }
       }
       return [jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec]; 
+    }));
+  }
+
+  RequestsPerDevisionAndDepartment(): Observable<any[]>{
+    this.numRequestsPerDivAndDep = [];
+    this.numRequestsPerDivAndDep[0].divisions = [];
+    return this.commonService.getStarters().pipe(map(starters=> {
+      for (var i=0; i < starters.length; i++){
+        let div = null; let Index = null;
+        div = starters[i].division
+        Index = this.divisions.findIndex(x => x == div);
+        if (Index === -1){
+          this.divisions.push(div);
+        }
+      }
+      for (var i=0; i < this.divisions.length; i++){
+        this.numRequestsPerDivAndDep[i].divisions.push(this.divisions[i])
+      }
+
+      console.log(this.numRequestsPerDivAndDep);
+
+      console.log(this.divisions);
+      return []; 
     }));
   }
 

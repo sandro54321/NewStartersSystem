@@ -25,7 +25,7 @@
       <mat-grid-tile  [colspan]="2" [rowspan]="2">
         <mat-card class="dashboard-card">
           <mat-card-content class="dashboard-card-content">
-            <app-bar-chart *ngIf="this.StatusByDepartment"  [data]="this.StatusByDepartment"></app-bar-chart>       
+            <app-stacked-bar *ngIf="this.StatusByDepartment"  [data]="this.StatusByDepartment"></app-stacked-bar>       
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>

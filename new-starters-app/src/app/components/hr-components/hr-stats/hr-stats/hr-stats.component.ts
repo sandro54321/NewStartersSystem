@@ -20,6 +20,7 @@ export class HrStatsComponent implements OnInit {
     this.statisticsService.StatusByDepartment().subscribe(data => {this.StatusByDepartment = data;});
     this.statisticsService.NumberOfRequestsByDepartment().subscribe(data => {this.NumberOfRequestsByDepartment = data;});
     this.statisticsService.NumberOfRequestsPerMonth().subscribe(data => {this.NumberOfRequestsPerMonth = data; console.log(this.NumberOfRequestsPerMonth)});
+    this.statisticsService.RequestsPerDevisionAndDepartment().subscribe(data => console.log())
 
   }
 
