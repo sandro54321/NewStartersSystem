@@ -1,0 +1,52 @@
+<div class="grid-container">
+    <h1 class="mat-h1">Dashboard</h1>
+    <mat-grid-list cols="4" rowHeight="250.5px">     
+      <mat-grid-tile  [colspan]="2" [rowspan]="2">
+        <mat-card class="dashboard-card">
+          <mat-card-content class="dashboard-card-content">
+            <app-bar-chart *ngIf="this.StatusByDepartment"  [data]="this.StatusByDepartment"></app-bar-chart>       
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile  [colspan]="2" [rowspan]="2">
+        <mat-card class="dashboard-card">
+          <mat-card-content class="dashboard-card-content">
+            <app-pie-chart *ngIf="this.NumberOfRequestsByDepartment"  [data]="this.NumberOfRequestsByDepartment"></app-pie-chart>       
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile  [colspan]="2" [rowspan]="2">
+        <mat-card class="dashboard-card">
+          <mat-card-content class="dashboard-card-content">
+            <app-line-chart *ngIf="this.NumberOfRequestsPerMonth"  [data]="this.NumberOfRequestsPerMonth"></app-line-chart>       
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile  [colspan]="2" [rowspan]="2">
+        <mat-card class="dashboard-card">
+          <mat-card-content class="dashboard-card-content">
+            <app-stacked-bar *ngIf="this.StatusByDepartment"  [data]="this.StatusByDepartment"></app-stacked-bar>       
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile  [colspan]="2" [rowspan]="2">
+        <mat-card class="dashboard-card">
+          <mat-card-content class="dashboard-card-content">
+            <app-bar-chart *ngIf="this.StatusByDepartment"  [data]="this.StatusByDepartment"></app-bar-chart>       
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile  [colspan]="2" [rowspan]="2">
+        <mat-card class="dashboard-card">
+          <mat-card-content class="dashboard-card-content">
+            <app-bar-chart *ngIf="this.StatusByDepartment"  [data]="this.StatusByDepartment"></app-bar-chart>       
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+  
+  
+    </mat-grid-list>
+  </div>
+  
+  
+  
