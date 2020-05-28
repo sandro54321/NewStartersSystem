@@ -41,7 +41,7 @@ router.post('/authenticate', (req,res) => {
                     expiresIn: 6000000
                 });
                 console.log("authenticate route token: " + token);
-                res.json({success: true, token: 'bearer ' + token, user: {id: user._id, name:user.name, username: user.username, email: user.email}});
+                res.json({success: true, token: 'bearer ' + token, user: {id: user._id, name:user.name, role: user.role, email: user.email}});
             } else {
                 return res.json({success: false, msg: 'Wrong Password!'});
             }

@@ -37,10 +37,17 @@
       <mat-divider></mat-divider>
   
       <h2 matSubheader>Pages</h2>
-  
-      <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
-      <a mat-list-item routerLinkActive="list-item-active" routerLink="/posts">Statistics</a>
-
+      
+    <div  *ngIf="this.role=='admin'">
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/hr-home">HR Dashboard</a>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/chart">HR Statistics</a>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/lm">LM Dashboard</a>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/chart">LM Statistics</a>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/it">IT Dashboard</a>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/chart">IT Statistics</a>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/prop">Prop Dashboard</a>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/chart">Prop Statistics</a>
+    </div>
      
   </mat-nav-list>
   </mat-drawer>

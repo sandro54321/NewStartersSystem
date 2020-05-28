@@ -16,10 +16,12 @@ export class NavigationComponent {
 
   email:String;
   name:String;
+  role:String
 
   ngOnInit(): void {
     this.email = this.authService.getUserData().email; 
     this.name = this.authService.getUserData().name;
+    this.role = this.authService.getUserData().role;
   }
 
   onLogoutClick(){
