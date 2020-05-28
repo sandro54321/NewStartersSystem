@@ -40,7 +40,7 @@ export class PropHomeComponent implements OnInit {
 
   
   getPropertyItems(){ 
-    this.commonService.getPropertyItems().subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator})
+    this.commonService.getPropertyItems().subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator; this.getStats(starters)})
   }
 
     
@@ -49,6 +49,28 @@ export class PropHomeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   
+  getStats(starters){
+    this.totalRequests = starters.length;
+
+    this.openRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].propertyState == 'Open')
+        this.openRequests++;
+    }
+
+    this.completeRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].propertyState == 'Complete')
+        this.completeRequests++;
+    }
+
+    this.closedRequests = 0;
+    for(var i = 0; i < starters.length; ++i){
+    if(starters[i].propertyState == 'Closed')
+        this.closedRequests++;
+    }
+
+  }
 
 }
  

@@ -39,6 +39,7 @@
       <h2 matSubheader>Pages</h2>
       
     <div  *ngIf="this.role=='admin'">
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Admin Panel</a>
       <a mat-list-item routerLinkActive="list-item-active" routerLink="/hr-home">HR Dashboard</a>
       <a mat-list-item routerLinkActive="list-item-active" routerLink="/chart">HR Statistics</a>
       <a mat-list-item routerLinkActive="list-item-active" routerLink="/lm">LM Dashboard</a>

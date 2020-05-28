@@ -53,12 +53,16 @@ import { StatisticsService } from './services/statistics.service';
 import { PieChartComponent } from './components/charts/pie-chart/pie-chart.component';
 import { LineChartComponent } from './components/charts/line-chart/line-chart.component';
 import { StackedBarComponent } from './components/charts/stacked-bar/stacked-bar.component';
-import { FlashMessagesModule } from 'angular2-flash-messages'
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { AdminPanelComponent } from './components/admin-components/admin-panel/admin-panel.component';
+import { AdminEditComponent } from './components/admin-components/admin-edit/admin-edit.component';
+import { AdminCreateComponent } from './components/admin-components/admin-create/admin-create.component'
 
 
 
 const appRoutes: Routes = [
   {path:'login', component: LoginComponent},
+  {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard]},
   {path: 'hr-home', component: HrHomeComponent},
   {path: 'add', component: AddComponent},
   {path: 'edit/:id', component: EditComponent},
@@ -100,7 +104,10 @@ const appRoutes: Routes = [
     BarChartComponent,
     PieChartComponent,
     LineChartComponent,
-    StackedBarComponent
+    StackedBarComponent,
+    AdminPanelComponent,
+    AdminEditComponent,
+    AdminCreateComponent
   ],
   imports: [
     BrowserModule,

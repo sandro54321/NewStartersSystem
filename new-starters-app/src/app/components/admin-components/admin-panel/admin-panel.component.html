@@ -1,0 +1,81 @@
+<flash-messages></flash-messages>
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="4" rowHeight="162.5px">     
+
+    <mat-grid-tile  [colspan]="4" [rowspan]="4">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Users
+          </mat-card-title>
+        </mat-card-header> 
+
+        <div fxLayout fxLayoutAlign="flex-start" >
+          <div>
+            <button mat-raised-button (click)="onCreate()">
+              <mat-icon>add</mat-icon>
+              Create
+            </button>
+          </div>
+          <div fxFlex="100%">
+            <mat-form-field >
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Filter by any feild">
+            </mat-form-field>
+          </div>
+        </div>
+
+
+
+        <mat-card-content class="dashboard-card-content">
+
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSortActive="dateCreated" matSortDirection="desc" matSortDisableClear>
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element" align="left"> {{element.name}}   </td>
+              
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let element" align="left"> {{element.email}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef> Role </th>
+              <td mat-cell *matCellDef="let element" align="left"> {{element.role}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let element" align="left"> 
+                <button  mat-raised-button color="accent" (click)="onEdit(element._id)" >Edit</button>
+                <button  mat-raised-button color="warn"  (click)="confirmDialog(element._id)" >Delete</button>
+              </td>
+              
+            </ng-container> 
+            
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+          <mat-paginator [pageSize]="8" ></mat-paginator>
+          
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+
+  </mat-grid-list>
+</div>
+
+

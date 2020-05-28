@@ -8,6 +8,7 @@ import {tokenNotExpired} from 'angular2-jwt';
 import {AuthService} from '../services/auth.service';
 
 import {Starter} from '../models/starter';
+import {User} from '../models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,6 +28,18 @@ export class CommonService {
   getStarters(): Observable<Starter[]>{
     return this.http.get<Starter[]>("http://localhost:3000/starters/all").pipe(
         map(res => res));
+  }
+
+  getUsers(): Observable<User[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.authService.loadToken()
+      })
+    };
+
+    return this.http.get<User[]>("http://localhost:3000/users/all", httpOptions).pipe(
+      map(res => res));
   }
   
   getLineManagers(): Observable<string[]>{
@@ -85,8 +98,18 @@ export class CommonService {
       pipe(map(res => res));
   }
 
+  getUser(id): Observable<User>{
+    return this.http.get<User>("http://localhost:3000/users/get/"+id).
+      pipe(map(res => res));
+  }
+
   deleteStarter(id){
     return this.http.delete("http://localhost:3000/starters/delete/"+id).pipe(
+        map(res => res));
+  }
+
+  deleteUser(id){
+    return this.http.delete("http://localhost:3000/users/delete/"+id).pipe(
         map(res => res));
   }
 
@@ -95,8 +118,18 @@ export class CommonService {
        pipe(map(res => res));
   }
 
+  addUser(info){
+    return this.http.post("http://localhost:3000/users/add",info).
+       pipe(map(res => res));
+  }
+
   updateStarter(id, info){
     return this.http.put("http://localhost:3000/starters/update/"+id,info).
+    pipe(map(res => res));
+  }
+
+  updateUser(id, info){
+    return this.http.put("http://localhost:3000/users/update/"+id,info).
     pipe(map(res => res));
   }
 

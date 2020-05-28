@@ -7,12 +7,12 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
 //Register Route
-router.post('/register', (req,res) => {
+router.post('/add', (req,res) => {
     let newUser = new User({
         name: req.body.name,
         email: req.body.email,
         role: req.body.role,
-        password: req.body.password
+        password: 'password'
     });
     User.addUser(newUser, (err, user) => {
         if(err){
@@ -63,5 +63,50 @@ router.get('/lmall', passport.authenticate('jwt', {session:false}), function (re
         res.json(data);
     })
 });
+
+//get all lm
+router.get('/all', passport.authenticate('jwt', {session:false}), function (req,res) {
+    User.getAllUsers(function (err, Users){
+        if(err) throw err;
+        var data = [];
+
+        for (var i = 0; i < Users.length; i++){
+            data.push(Users[i]);
+        }
+
+        res.json(data);
+    })
+});
+
+router.get('/get/:_id', function(req,res){
+    User.getUserByID(req.params._id, function(err,user){
+        if(err) throw err;
+        res.json(user);
+    })
+})
+
+//update
+router.put('/update/:_id', function(req,res){
+    let updatedUser = {
+        name: req.body.name, 
+        email: req.body.email,
+        role: req.body.role,
+    };
+
+    User.updateUser(req.params._id, updatedUser, function(err,user){
+        if(err) throw err;
+        res.json(user);
+    })
+})
+
+
+router.delete('/delete/:_id', function(req,res){
+    User.deleteUser(req.params._id, function(err,user){
+        if(err) throw err;
+        res.json(user);
+    })
+})
+
+
 
 module.exports = router;

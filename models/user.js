@@ -60,3 +60,20 @@ module.exports.getAllLineManagers = function(callback){
     User.find(callback).select('email')
 
 }
+
+module.exports.getAllUsers = function(callback){
+    User.find(callback)
+
+}
+
+module.exports.getUserByID = function(id, callback){
+    User.findById(id, callback);
+}
+
+module.exports.updateUser = function(id, newUser, callback){
+    User.findByIdAndUpdate(id, newUser, callback);
+}
+
+module.exports.deleteUser = function(id, callback){
+    User.findByIdAndDelete(id, callback);
+}
