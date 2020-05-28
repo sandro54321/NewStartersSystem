@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar *ngIf="authService.loggedIn()" color="primary">
   <mat-toolbar-row>
       <button mat-icon-button>
           <mat-icon>menu</mat-icon>
@@ -23,7 +23,7 @@
       </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-drawer-container>
+<mat-drawer-container *ngIf="authService.loggedIn()">
   <mat-drawer mode="side" opened>
     <mat-nav-list>
       <div class="profile-card">
@@ -48,3 +48,5 @@
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
+
+<router-outlet *ngIf="!authService.loggedIn()"></router-outlet>
