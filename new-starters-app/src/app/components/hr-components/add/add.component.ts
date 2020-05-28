@@ -95,7 +95,7 @@ export class AddComponent implements OnInit {
 
     console.table(this.model);
 
-    this.commonService.addStarter(this.model).subscribe(()=> console.log())
+    this.commonService.addStarter(this.model).subscribe(()=> this.close())
     this.sendEmail(this.model);
 
   }

@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { AddComponent } from '../add/add.component';
 import { EditComponent } from '../edit/edit.component';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../../dialogs/confirm-dialog/confirm-dialog.component';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-hr-home',
@@ -19,7 +20,7 @@ export class HrHomeComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(public commonService:CommonService, public dialog: MatDialog) { }
+  constructor(public commonService:CommonService, public dialog: MatDialog, public flashMessage: FlashMessagesService) { }
 
   displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'actions'];
   dataSource;
@@ -53,7 +54,7 @@ export class HrHomeComponent implements OnInit {
   onCreate(){
     const dialogRef = this.dialog.open(AddComponent, {width: '900px'});
 
-    dialogRef.afterClosed().subscribe(data => {if(data == "reload"){this.getStarters()}});
+    dialogRef.afterClosed().subscribe(data => {if(data == "reload"){this.getStarters(); this.flashMessage.show('New Starter Request Created', { cssClass: 'alert-success', timeout: 2000 });}});
   }
 
   onEdit(id){
