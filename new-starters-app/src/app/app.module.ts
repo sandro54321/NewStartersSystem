@@ -53,7 +53,7 @@ import { StatisticsService } from './services/statistics.service';
 import { PieChartComponent } from './components/charts/pie-chart/pie-chart.component';
 import { LineChartComponent } from './components/charts/line-chart/line-chart.component';
 import { StackedBarComponent } from './components/charts/stacked-bar/stacked-bar.component';
-
+import { FlashMessagesModule } from 'angular2-flash-messages'
 
 
 
@@ -124,7 +124,8 @@ const appRoutes: Routes = [
     MatRadioModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    FlashMessagesModule.forRoot()
   ],
   exports: [
     BarChartComponent

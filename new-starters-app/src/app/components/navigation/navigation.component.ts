@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class NavigationComponent {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   email:String;
   name:String;
