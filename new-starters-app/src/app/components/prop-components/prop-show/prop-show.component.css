@@ -30,4 +30,8 @@
     justify-content: flex-start;
   }
   
+  .mat-header-cell {
+    background-color: #62ABFF;
+}
+  
   

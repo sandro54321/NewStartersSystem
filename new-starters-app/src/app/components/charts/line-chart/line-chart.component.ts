@@ -27,17 +27,14 @@ export class LineChartComponent implements OnInit {
           type: 'spline'
       },
       title: {
-          text: 'Monthly Average Temperature'
-      },
-      subtitle: {
-          text: 'Source: WorldClimate.com'
+          text: 'Monthly Requests Created'
       },
       xAxis: {
           categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       },
       yAxis: {
           title: {
-              text: 'Temperature'
+              text: '#'
           },
           labels: {
               formatter: function () {

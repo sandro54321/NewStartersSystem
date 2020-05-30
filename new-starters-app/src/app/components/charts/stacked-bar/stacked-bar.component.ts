@@ -26,10 +26,10 @@ export class StackedBarComponent implements OnInit {
           type: 'bar'
       },
       title: {
-          text: 'Stacked bar chart'
+          text: 'Requests Per Division'
       },
       xAxis: {
-          categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+          categories: ['CTS', 'Networks', 'Telecommunication', 'Project Management', 'Call Center']
       },
       yAxis: {
           min: 0,

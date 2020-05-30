@@ -1,11 +1,11 @@
 <div class="grid-container">
   <div fxLayout fxLayoutAlign="flex-start" >
-    <div fxFlex="93%">
+    <div fxFlex="89%">
       <h1 class="mat-h1">Starter Details</h1>
     </div>
     <div >
       <button mat-raised-button color="warn" (click)="goBack()" >Go Back</button>
-      <button mat-raised-button color="warn" (click)="updateStarter()" >save</button>
+      <button mat-raised-button style="margin:5px;background-color:#3CB371;" (click)="updateStarter()" >save</button>
   
     </div>
   </div>
@@ -114,7 +114,7 @@
       <mat-card-header>
         <mat-card-title>
           Building Access Requests
-          <button mat-raised-button (click)="onCreate(starter._id,'ba')"><mat-icon>add</mat-icon>Create</button>
+          <button style="margin:5px;background-color:#3CB371;" mat-raised-button (click)="onCreate(starter._id,'ba')"><mat-icon>add</mat-icon>Create</button>
         </mat-card-title>
       </mat-card-header>
 
@@ -172,7 +172,7 @@
         <mat-card-header>
           <mat-card-title>
             Software Requests
-            <button mat-raised-button (click)="onCreate(starter._id,'sr')"><mat-icon>add</mat-icon>Create</button>
+            <button style="margin:5px;background-color:#3CB371;" mat-raised-button (click)="onCreate(starter._id,'sr')"><mat-icon>add</mat-icon>Create</button>
           </mat-card-title>
         </mat-card-header>
 
@@ -227,7 +227,7 @@
         <mat-card-header>
           <mat-card-title>
             Hardware Requests
-            <button mat-raised-button (click)="onCreate(starter._id,'hr')"><mat-icon>add</mat-icon>Create</button>
+            <button style="margin:5px;background-color:#3CB371;" mat-raised-button (click)="onCreate(starter._id,'hr')"><mat-icon>add</mat-icon>Create</button>
           </mat-card-title>
         </mat-card-header>
 

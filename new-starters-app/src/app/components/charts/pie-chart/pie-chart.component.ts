@@ -28,6 +28,9 @@ export class PieChartComponent implements OnInit {
 yAxis: {
   allowDecimals: false
 },
+credits: {
+    enabled: false
+  },
 title: {
     text: 'Requests Per Department'
 },
