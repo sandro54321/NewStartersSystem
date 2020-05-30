@@ -6,6 +6,7 @@ const cors = require('cors'); //allows me to make requests to the API from a dif
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database')
+const User = require('./models/user');
 
 //Connect To Database
 mongoose.connect(config.database);
@@ -13,6 +14,32 @@ mongoose.connect(config.database);
 //When connected
 mongoose.connection.on('connected', () => {
     console.log('Connected to database: ' + config.database)
+
+    //Check if test user exists and add to DB if it does not exist 
+    User.GetUserByEmail('testuser@gmail.com', (err, callback) => {
+        if(err){
+            console.log(err);
+        }else if (callback){
+            console.log(callback);
+        }
+        else if(callback === null){
+            let newUser = new User({
+                name: 'Testing',
+                email: 'testuser@gmail.com',
+                role: 'admin',
+                password: 'password'
+            });
+        
+            User.addUser(newUser, (err, user) => {
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(user);
+                }
+            })
+        }
+    })
+
 })
 mongoose.connection.on('error', (err) => {
     console.log('Database error:  ' + err)
