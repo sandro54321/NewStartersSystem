@@ -187,6 +187,12 @@ export class CommonService {
        pipe(map(res => res));
   }
 
+  getComments(id): Observable<[]>{
+    return this.http.get<[]>("http://localhost:3000/starters/comments/" + id).pipe(
+        map(res => res));
+  }
+
+
   formatDate(date){
     var oldDate = date;
     var dd = String(oldDate.getDate()).padStart(2, '0');

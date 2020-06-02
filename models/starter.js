@@ -175,7 +175,17 @@ module.exports.updateFeild = function(id, value , callback){
 module.exports.addComment = function(id, comment, callback){
     console.log(comment)
     Starter.findByIdAndUpdate(id, {$push:{"comments" : comment}}, callback)
+}
 
+module.exports.getComments = function(id, callback){
+    //const query = {_id: id};
+    //Starter.findOne(query, callback);
+    //Starter.findById(id, callback);
+    let user;
+    console.log(id);
+    Starter.findById(id, user);
+
+    console.log('user ', user);
 
 }
 

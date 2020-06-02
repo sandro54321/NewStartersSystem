@@ -160,5 +160,15 @@ router.put('/comment/:_id', function(req,res){
     })
 })
 
+router.get('/comments/:_id', function(req,res){
+    Starter.getStarter(req.params._id, function(err,starter){
+        if(err){
+            res.json({success: false, msg:'Failed to get comments'})
+        }else if(starter){
+            res.json(starter.comments)
+        }
+    })
+})
+
 
 module.exports = router;

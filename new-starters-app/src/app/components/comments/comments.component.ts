@@ -25,11 +25,11 @@ export class CommentsComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.getComments();
   }
 
-  getStarter(){
-    var id = this.route.snapshot.params['id'];
-    this.commonService.getStarter(id).subscribe(starter=> {this.starter = starter})
+  getComments(){
+    this.commonService.getComments(this.data.id).subscribe(comments=> {this.comments = comments, console.log(this.comments)})
   }
 
   addComment(){
@@ -38,7 +38,7 @@ export class CommentsComponent implements OnInit {
     this.comment.sentBy = user.name
     this.comment.time = new Date()
     
-    this.commonService.addComment(this.data.id, this.comment).subscribe(()=> console.log('Hi'))
+    this.commonService.addComment(this.data.id, this.comment).subscribe(()=> this.getComments())
 
   }
 }

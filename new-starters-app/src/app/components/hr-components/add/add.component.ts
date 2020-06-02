@@ -93,7 +93,7 @@ export class AddComponent implements OnInit {
     this.model.startDate = this.newStarterForm.get('startDate').value
     this.model.state = "Open";
 
-    console.table(this.model);
+    console.table(this.model); 
 
     this.commonService.addStarter(this.model).subscribe(()=> this.close())
     this.sendEmail(this.model);

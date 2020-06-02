@@ -10,9 +10,10 @@
         <hr/>
         <h3>Comments</h3>
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="cmt in comments"> 
-                <a href="" ng-click="post_cmt($home)"><span class="glyphicon glyphicon-trash" style="color:red; float:right;"></span></a>
-            </li>
+            <div *ngFor="let coms of comments"> 
+                {{coms.sentBy}}: {{coms.comment}}
+                <br>
+            </div>
         </ul>
     </form> 
 </div>
