@@ -56,28 +56,28 @@ import { StackedBarComponent } from './components/charts/stacked-bar/stacked-bar
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AdminPanelComponent } from './components/admin-components/admin-panel/admin-panel.component';
 import { AdminEditComponent } from './components/admin-components/admin-edit/admin-edit.component';
-import { AdminCreateComponent } from './components/admin-components/admin-create/admin-create.component'
-
+import { AdminCreateComponent } from './components/admin-components/admin-create/admin-create.component';
+import { DeniedComponent } from './components/denied/denied.component';
+import { CommentsComponent } from './components/comments/comments.component'
 
 
 const appRoutes: Routes = [
   {path:'login', component: LoginComponent},
-  {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard]},
-  {path: 'hr-home', component: HrHomeComponent},
-  {path: 'add', component: AddComponent},
-  {path: 'edit/:id', component: EditComponent},
-  {path: 'show/:id', component: ShowComponent},
-  {path: 'lm', component: LmHomeComponent, canActivate: [AuthGuard]},
-  {path: 'lm-add/:form/:id', component: LmAddComponent},
-  {path: 'lm-show/:id', component: LmShowComponent},
-  {path: 'it', component: ItHomeComponent, canActivate: [AuthGuard]},
-  {path: 'it-show/:id', component: ItShowComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AdminPanelComponent, data: {allowedRoles: ['admin']}, canActivate: [AuthGuard]},
+  {path: 'hr-home', component: HrHomeComponent, data: {allowedRoles: ['admin', 'hr']}, canActivate: [AuthGuard]},
+  {path: 'add', component: AddComponent, data: {allowedRoles: ['admin', 'hr']}, canActivate: [AuthGuard]},
+  {path: 'edit/:id', component: EditComponent, data: {allowedRoles: ['admin', 'hr']}, canActivate: [AuthGuard]},
+  {path: 'show/:id', component: ShowComponent, data: {allowedRoles: ['admin', 'hr']}, canActivate: [AuthGuard]},
+  {path: 'lm', component: LmHomeComponent, data: {allowedRoles: ['admin', 'lm']}, canActivate: [AuthGuard]},
+  {path: 'lm-add/:form/:id', component: LmAddComponent, data: {allowedRoles: ['admin', 'lm']}, canActivate: [AuthGuard]},
+  {path: 'lm-show/:id', component: LmShowComponent, data: {allowedRoles: ['admin', 'lm']}, canActivate: [AuthGuard]},
+  {path: 'it', component: ItHomeComponent, data: {allowedRoles: ['admin', 'it']}, canActivate: [AuthGuard]},
+  {path: 'it-show/:id', component: ItShowComponent, data: {allowedRoles: ['admin', 'it']}, canActivate: [AuthGuard]},
   {path: 'dash/:id', component: TestingComponent, canActivate: [AuthGuard]},
-  {path: 'prop', component: PropHomeComponent, canActivate: [AuthGuard]},
-  {path: 'prop-show/:id', component: PropShowComponent, canActivate: [AuthGuard]},
-  {path: 'chart', component: HrStatsComponent, canActivate: [AuthGuard]},
-
-
+  {path: 'prop', component: PropHomeComponent, data: {allowedRoles: ['admin', 'prop']}, canActivate: [AuthGuard]},
+  {path: 'prop-show/:id', component: PropShowComponent, data: {allowedRoles: ['admin', 'prop']}, canActivate: [AuthGuard]},
+  {path: 'chart', component: HrStatsComponent, data: {allowedRoles: ['admin', 'hr']}, canActivate: [AuthGuard]},
+  {path: 'denied', component: DeniedComponent}
 ] 
 
 @NgModule({
@@ -107,7 +107,9 @@ const appRoutes: Routes = [
     StackedBarComponent,
     AdminPanelComponent,
     AdminEditComponent,
-    AdminCreateComponent
+    AdminCreateComponent,
+    DeniedComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

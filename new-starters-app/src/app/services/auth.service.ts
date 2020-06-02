@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { headersToString } from 'selenium-webdriver/http';
 import {tokenNotExpired} from 'angular2-jwt';
+import {Router, ActivatedRoute} from '@angular/router';
+import { RoutesRecognized }    from '@angular/router';
 
 
 @Injectable({
@@ -14,7 +16,7 @@ export class AuthService {
   authToken: any;
   user: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router:Router, private route: ActivatedRoute) { }
 
   registerUsers(user): Observable<any> {
     let httpOptions = { headers: new Headers({ 'Content-Type': 'application/json' }) };
@@ -43,10 +45,34 @@ export class AuthService {
     return user;
   }
 
+  getUserRole(){
+    let user = JSON.parse(localStorage.getItem('user'));
+    let role = user.role
+    
+    return role;
+  }
+
   loggedIn(){
     //console.log("token expired" + tokenNotExpired());
     return tokenNotExpired('id_token');
   }
+
+  permission(){
+    let permission: boolean;
+    let roles = [];
+    this.router.events.subscribe(event => {
+      if (event instanceof RoutesRecognized) {
+        let route = event.state.root.firstChild;
+        console.log(route);
+        roles =  route.data.allowedRoles || '';
+        console.log(roles)
+        
+      }
+  })
+
+
+  };
+
 
   storeUserData(token, user){
     localStorage.setItem('id_token', token);

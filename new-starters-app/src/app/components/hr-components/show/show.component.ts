@@ -4,6 +4,8 @@ import { Starter } from '../../../models/Starter';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatDialog} from '@angular/material/dialog';
+import { CommentsComponent } from '../../comments/comments.component';
 
 @Component({
   selector: 'app-show',
@@ -18,7 +20,8 @@ export class ShowComponent implements OnInit {
   constructor(
     public commonService:CommonService,
     public route:ActivatedRoute,
-    public router:Router
+    public router:Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +44,12 @@ export class ShowComponent implements OnInit {
 
   goBack(){
     this.router.navigate(['/hr-home'])
+  }
+
+  onNote(id){
+    const dialogRef = this.dialog.open(CommentsComponent, {width: '900px', data: { id: id }});
+
+    dialogRef.afterClosed().subscribe(data => {if(data == "reload"){console.log('reload')}});
   }
   
 }

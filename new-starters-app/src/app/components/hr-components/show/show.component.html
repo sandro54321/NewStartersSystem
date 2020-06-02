@@ -1,10 +1,11 @@
 <div class="grid-container">
 
 <div fxLayout fxLayoutAlign="flex-start" >
-  <div fxFlex="93%">
+  <div fxFlex="92%">
     <h1 class="mat-h1">Starter Details</h1>
   </div>
   <div >
+    <mat-icon style="margin:5px;" (click)="onNote(starter._id)">note_add</mat-icon>
     <button mat-raised-button color="warn" (click)="goBack()" >Go Back</button>
 
   </div>
