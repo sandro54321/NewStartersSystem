@@ -1,1 +1,19 @@
-<p>comments works!</p>
+<div class="form-group">
+    <h2>Leave a Comment</h2>
+    <form [formGroup]="commentForm" novalidate (ngSubmit)="commentForm.valid && addComment()">
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Comment" formControlName="comment" >
+            </mat-form-field>
+        <br/>
+        <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">Comment</button>
+        <br/>
+        <hr/>
+        <h3>Comments</h3>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="cmt in comments"> 
+                <a href="" ng-click="post_cmt($home)"><span class="glyphicon glyphicon-trash" style="color:red; float:right;"></span></a>
+            </li>
+        </ul>
+    </form> 
+</div>
+

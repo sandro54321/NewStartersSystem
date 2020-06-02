@@ -96,6 +96,11 @@ const StarterSchema = mongoose.Schema({
         model: String,
         deviceType: String,
         state:String
+    }],
+    comments:[{
+        sentBy:String,
+        comment:String,
+        time:Date
     }]
 });
 
@@ -164,6 +169,14 @@ module.exports.getStarter = function(id, callback){
 module.exports.updateFeild = function(id, value , callback){
     Starter.findByIdAndUpdate(id, {$set:{"state" : value}}, callback)
     console.log(callback);
+}
+
+
+module.exports.addComment = function(id, comment, callback){
+    console.log(comment)
+    Starter.findByIdAndUpdate(id, {$push:{"comments" : comment}}, callback)
+
+
 }
 
 

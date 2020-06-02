@@ -144,6 +144,21 @@ router.post('/state', (req,res) => {
 
 )
 
+router.put('/comment/:_id', function(req,res){
+    let comment = {
+        sentBy: req.body.sentBy,
+        comment: req.body.comment,
+        time: req.body.time
+    }
+
+    Starter.addComment(req.params._id, comment, (err, callback) => {
+        if(err){
+            res.json({success: false, msg:'Failed to add comment'})
+        }else if(callback){
+            res.json({success: true, msg:'Comment Added'})
+        }
+    })
+})
 
 
 module.exports = router;

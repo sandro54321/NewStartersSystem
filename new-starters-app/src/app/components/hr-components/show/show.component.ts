@@ -52,5 +52,6 @@ export class ShowComponent implements OnInit {
     dialogRef.afterClosed().subscribe(data => {if(data == "reload"){console.log('reload')}});
   }
   
+  
 }
 

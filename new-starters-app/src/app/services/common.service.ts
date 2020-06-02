@@ -182,6 +182,11 @@ export class CommonService {
 
   }
 
+  addComment(id,comment){
+    return this.http.put("http://localhost:3000/starters/comment/" + id, comment).
+       pipe(map(res => res));
+  }
+
   formatDate(date){
     var oldDate = date;
     var dd = String(oldDate.getDate()).padStart(2, '0');

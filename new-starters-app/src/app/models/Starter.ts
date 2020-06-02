@@ -22,4 +22,6 @@ export class Starter {
     buildingAccess: Array<{_id: String, country:String,building:String, floor:String, room:String, officeArea:Boolean, equiptmentArea: Boolean, state: String}> = [];
     softwareRequest: Array<{_id: String, supplier:String,description:String,accountType:String, state: String}> = [];
     hardwareRequest: Array<{_id: String, manufacturer:String,model:String,deviceType:String, state: String}> = [];
+    comments: Array<{sentBy:String, comment:String, time:Date}> = [];
+
 }
