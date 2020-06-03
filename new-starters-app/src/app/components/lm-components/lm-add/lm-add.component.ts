@@ -91,6 +91,7 @@ export class LmAddComponent implements OnInit {
     this.BaDataSource.data.push({_id: id, country: this.newBaForm.get('country').value, building: this.newBaForm.get('building').value, floor: this.newBaForm.get('floor').value, room: this.newBaForm.get('room').value, officeArea: this.newBaForm.get('officeArea').value, equiptmentArea: this.newBaForm.get('equipmentArea').value, state: 'Open'});
     this.BaDataSource.data = this.BaDataSource.data;
     this.newBaForm.reset();
+    console.log(this.BaDataSource);
     //console.table(this.model.buildingAccess);
     }else if(name === 'sr'){
       var id = this.makeid(24);

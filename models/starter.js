@@ -73,6 +73,12 @@ const StarterSchema = mongoose.Schema({
     ItState:{
         type: String
     },
+    propAssignedTo:{
+        type: String
+    },
+    itAssignedTo:{
+        type: String
+    },
     buildingAccess:[{
         _id:String,
         country: String,
@@ -81,21 +87,21 @@ const StarterSchema = mongoose.Schema({
         room: String,
         officeArea: Boolean,
         equiptmentArea: Boolean,
-        state:String
+        state:String,
     }],
     softwareRequest:[{
         _id: String,
         supplier: String,
         description: String,
         accountType: String,
-        state:String
+        state:String,
     }],
     hardwareRequest:[{
         _id:String,
         manufacturer: String,
         model: String,
         deviceType: String,
-        state:String
+        state:String,
     }],
     comments:[{
         sentBy:String,

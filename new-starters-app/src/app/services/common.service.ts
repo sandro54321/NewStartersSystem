@@ -54,6 +54,30 @@ export class CommonService {
         map(res => res));
   }
 
+  getItUsers(): Observable<string[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.authService.loadToken()
+      })
+    };
+
+    return this.http.get<string[]>("http://localhost:3000/users/itall", httpOptions).pipe(
+        map(res => res));
+  }
+
+  getPropUsers(): Observable<string[]>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.authService.loadToken()
+      })
+    };
+
+    return this.http.get<string[]>("http://localhost:3000/users/propall", httpOptions).pipe(
+        map(res => res));
+  }
+
   getLmItems(lmEmail): Observable<Starter[]>{
     
     const httpOptions = {

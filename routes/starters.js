@@ -91,6 +91,8 @@ router.put('/update/:_id', function(req,res){
         startDate: req.body.startDate,
         state: req.body.state,
         propertyState: req.body.propertyState,
+        propAssignedTo: req.body.propAssignedTo,
+        itAssignedTo: req.body.itAssignedTo,
         ItState: req.body.ItState,
         baComplete: req.body.baComplete,
         srComplete: req.body.srComplete,
@@ -99,7 +101,7 @@ router.put('/update/:_id', function(req,res){
         softwareRequest: req.body.softwareRequest,
         hardwareRequest: req.body.hardwareRequest
     };
-
+    
     Starter.updateStarter(req.params._id, updatedStarter, function(err,starter){
         if(err) throw err;
         res.json(starter);

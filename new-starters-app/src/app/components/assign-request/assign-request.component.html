@@ -1,0 +1,22 @@
+<div class="form-group">
+    <h2>Assign To</h2>
+    <form [formGroup]="assignForm" novalidate (ngSubmit)="assignForm.valid && assignTo()">
+        <mat-form-field class="full-width">
+            <input type="text"
+            placeholder="Pick one"
+            aria-label="Number"
+            matInput
+            [formControl]="assignControl"
+            [matAutocomplete]="auto"
+            formControlName="assignTo">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+      </mat-form-field>
+        <br/>
+        <button mat-raised-button color="primary" type="submit" [disabled]="assignForm.invalid">Assign To</button>
+    </form> 
+</div>
+

@@ -58,7 +58,8 @@ import { AdminPanelComponent } from './components/admin-components/admin-panel/a
 import { AdminEditComponent } from './components/admin-components/admin-edit/admin-edit.component';
 import { AdminCreateComponent } from './components/admin-components/admin-create/admin-create.component';
 import { DeniedComponent } from './components/denied/denied.component';
-import { CommentsComponent } from './components/comments/comments.component'
+import { CommentsComponent } from './components/comments/comments.component';
+import { AssignRequestComponent } from './components/assign-request/assign-request.component'
 
 
 const appRoutes: Routes = [
@@ -109,7 +110,8 @@ const appRoutes: Routes = [
     AdminEditComponent,
     AdminCreateComponent,
     DeniedComponent,
-    CommentsComponent
+    CommentsComponent,
+    AssignRequestComponent
   ],
   imports: [
     BrowserModule,

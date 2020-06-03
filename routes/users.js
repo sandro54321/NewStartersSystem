@@ -64,7 +64,38 @@ router.get('/lmall', passport.authenticate('jwt', {session:false}), function (re
     })
 });
 
-//get all lm
+//get all it
+router.get('/itall', passport.authenticate('jwt', {session:false}), function (req,res) {
+    console.log('getting it users')
+    User.getItUsers(function (err, users){
+
+        if(err) throw err;
+        var data = [];
+
+        for (var i = 0; i < users.length; i++){
+            data.push(users[i].email);
+        }
+
+        res.json(data);
+    })
+});
+
+//get all prop
+router.get('/propall', passport.authenticate('jwt', {session:false}), function (req,res) {
+    console.log('getting prop users')
+    User.getPropUsers(function (err, users){
+
+        if(err) throw err;
+        var data = [];
+
+        for (var i = 0; i < users.length; i++){
+            data.push(users[i].email);
+        }
+
+        res.json(data);
+    })
+});
+
 router.get('/all', passport.authenticate('jwt', {session:false}), function (req,res) {
     User.getAllUsers(function (err, Users){
         if(err) throw err;

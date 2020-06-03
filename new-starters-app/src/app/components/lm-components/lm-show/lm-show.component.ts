@@ -73,6 +73,7 @@ export class LmShowComponent implements OnInit {
       this.SrDataSource.data.push.apply(this.SrDataSource.data, data.sr), 
       this.SrDataSource.data = this.SrDataSource.data,
       this.starter.ItState = 'Open';
+      this.starter.itAssignedTo = 'Not Assigned'
       this.sendEmail(this.starter);
       }
       
@@ -80,12 +81,14 @@ export class LmShowComponent implements OnInit {
       this.HrDataSource.data.push.apply(this.HrDataSource.data, data.hr),
       this.HrDataSource.data = this.HrDataSource.data,
       this.starter.ItState = 'Open';
+      this.starter.itAssignedTo = 'Not Assigned'
       }
       
       if(data.ba.length > 0){
       this.BaDataSource.data.push.apply(this.BaDataSource.data, data.ba),
       this.BaDataSource.data = this.BaDataSource.data};
       this.starter.propertyState = 'Open';
+      this.starter.propAssignedTo = 'Not Assigned'
     });
   }
 

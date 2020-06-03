@@ -10,6 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 
 import {MatDialog} from '@angular/material/dialog';
+import { AssignRequestComponent } from '../../assign-request/assign-request.component';
 
 @Component({
   selector: 'app-prop-home',
@@ -26,7 +27,7 @@ export class PropHomeComponent implements OnInit {
   completeRequests: number;
   closedRequests: number;
 
-  displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'actions'];
+  displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'assignedTo', 'actions'];
   dataSource;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -40,13 +41,25 @@ export class PropHomeComponent implements OnInit {
 
   
   getPropertyItems(){ 
-    this.commonService.getPropertyItems().subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator; this.getStats(starters)})
+    this.commonService.getPropertyItems().subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator; this.getStats(starters), console.log(starters)})
   }
 
     
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onAssign(id){
+    const dialogRef = this.dialog.open(AssignRequestComponent, {width: '900px', data: {id:  id, type: 'prop'}});
+
+    //dialogRef.afterClosed().subscribe(data => {if(data == "reload"){this.getStarter()}});
+    dialogRef.afterClosed().subscribe(data => {
+      if(data =='reload'){
+        this.getPropertyItems();
+      }
+
+    });
   }
   
   getStats(starters){

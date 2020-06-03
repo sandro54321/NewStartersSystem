@@ -57,7 +57,8 @@ module.exports.comparePassword = function(password, hash, callback){
 }
 
 module.exports.getAllLineManagers = function(callback){
-    User.find(callback).select('email')
+    User.find({$or:[{ role: { $eq: 'admin'} }, { role: { $eq: 'line manager'} } ]}, callback).select('email')
+    
 
 }
 
@@ -77,3 +78,13 @@ module.exports.updateUser = function(id, newUser, callback){
 module.exports.deleteUser = function(id, callback){
     User.findByIdAndDelete(id, callback);
 }
+
+module.exports.getItUsers = function(callback){
+    // var collection = Starter.collection("starters");
+     User.find( {$or:[{ role: { $eq: 'admin'} }, { role: { $eq: 'it'} } ]} , callback);
+ }
+
+ module.exports.getPropUsers = function(callback){
+    // var collection = Starter.collection("starters");
+     User.find( {$or:[{ role: { $eq: 'admin'} }, { role: { $eq: 'property'} } ]} , callback);
+ }
