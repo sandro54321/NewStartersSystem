@@ -74,7 +74,7 @@ export class LmShowComponent implements OnInit {
       this.SrDataSource.data = this.SrDataSource.data,
       this.starter.ItState = 'Open';
       this.starter.itAssignedTo = 'Not Assigned'
-      this.sendEmail(this.starter);
+      
       }
       
       if(data.hr.length > 0){
@@ -90,6 +90,7 @@ export class LmShowComponent implements OnInit {
       this.starter.propertyState = 'Open';
       this.starter.propAssignedTo = 'Not Assigned'
     });
+
   }
 
   updateStarter(){
@@ -97,6 +98,7 @@ export class LmShowComponent implements OnInit {
     console.log('stater', this.starter);
     this.commonService.updateStarter(this.starter._id,this.starter).subscribe(() => this.goBack())
     this.userAD(this.starter);
+    this.sendEmail(this.starter);
   }
   
   onRemove(index, type){

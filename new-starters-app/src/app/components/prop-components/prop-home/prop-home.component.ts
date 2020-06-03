@@ -27,7 +27,7 @@ export class PropHomeComponent implements OnInit {
   completeRequests: number;
   closedRequests: number;
 
-  displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'assignedTo', 'actions'];
+  displayedColumns: string[] = ['name', 'dateCreated', 'department', 'assignedTo', 'state', 'actions'];
   dataSource;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -52,7 +52,6 @@ export class PropHomeComponent implements OnInit {
 
   onAssign(id){
     const dialogRef = this.dialog.open(AssignRequestComponent, {width: '900px', data: {id:  id, type: 'prop'}});
-
     //dialogRef.afterClosed().subscribe(data => {if(data == "reload"){this.getStarter()}});
     dialogRef.afterClosed().subscribe(data => {
       if(data =='reload'){

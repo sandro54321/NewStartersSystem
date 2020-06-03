@@ -97,6 +97,11 @@
               <th mat-header-cell *matHeaderCellDef> Department </th>
               <td mat-cell *matCellDef="let element" align="left"> {{element.department}} </td>
             </ng-container>
+
+            <ng-container matColumnDef="assignedTo">
+              <th mat-header-cell *matHeaderCellDef> Assigned To </th>
+              <td mat-cell *matCellDef="let element" align="left"> {{element.itAssignedTo}} </td>
+            </ng-container>
           
             <ng-container matColumnDef="state">
               <th mat-header-cell *matHeaderCellDef> State </th>
@@ -107,6 +112,7 @@
               <th mat-header-cell *matHeaderCellDef> Actions </th>
               <td mat-cell *matCellDef="let element" align="left"> 
                 <button  mat-raised-button color="primary" routerLink="/it-show/{{element._id}}" >Details</button> 
+                <button  style="margin:5px;background-color:#3CB371;" mat-raised-button (click)="onAssign(element._id)">Assign To</button> 
               </td>
             </ng-container> 
             

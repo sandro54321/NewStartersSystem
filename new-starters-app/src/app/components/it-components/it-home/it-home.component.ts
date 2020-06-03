@@ -10,6 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 
 import {MatDialog} from '@angular/material/dialog';
+import { AssignRequestComponent } from '../../assign-request/assign-request.component';
 
 @Component({
   selector: 'app-it-home',
@@ -27,7 +28,7 @@ export class ItHomeComponent implements OnInit {
   completeRequests: number;
   closedRequests: number;
 
-  displayedColumns: string[] = ['name', 'dateCreated', 'department', 'state', 'actions'];
+  displayedColumns: string[] = ['name', 'dateCreated', 'department', 'assignedTo', 'state', 'actions'];
   dataSource;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -44,6 +45,15 @@ export class ItHomeComponent implements OnInit {
     this.commonService.getItItems().subscribe(starters=>{this.dataSource = new MatTableDataSource(starters); this.dataSource.sort = this.sort; this.dataSource.paginator = this.paginator; this.getStats(starters)})
   }
 
+  onAssign(id){
+    const dialogRef = this.dialog.open(AssignRequestComponent, {width: '900px', data: {id:  id, type: 'it'}});
+    dialogRef.afterClosed().subscribe(data => {
+      if(data =='reload'){
+        this.getItItems();
+      }
+
+    });
+  }
     
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
